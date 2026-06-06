@@ -10,6 +10,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1TBGXB2829"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1TBGXB2829');
+        
+        // Track page views with additional parameters
+        gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: window.location.href,
+            page_path: window.location.pathname
+        });
+    </script>
+    <!-- Configuration -->
+    <script src="js/config.js"></script>
+    <!-- User Tracking -->
+    <script src="js/user-tracking.js"></script>
+    <!-- Performance Monitoring -->
+    <script src="js/performance-monitor.js"></script>
+    <!-- Privacy Controls -->
+    <script src="js/privacy-controls.js"></script>
 <style>
 :root {
     --blue: #064d81;
