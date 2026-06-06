@@ -18,9 +18,18 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-1TBGXB2829');
         
-        // Track page views with additional parameters
+        // Set default consent
+        gtag('consent', 'default', {
+            'analytics_storage': 'granted',
+            'ad_storage': 'denied'
+        });
+
+        gtag('config', 'G-1TBGXB2829', { 'debug_mode': true });
+        
+        console.log('GA4: Tracking initialized with ID G-1TBGXB2829');
+        
+        // Track page views
         gtag('event', 'page_view', {
             page_title: document.title,
             page_location: window.location.href,
