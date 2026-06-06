@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Center | IKON Business Products & Solutions</title>
+    <meta name="description" content="Explore IKON's wide range of intelligent cutting machines, including CNC oscillating knives, laser cutters, routers, and multi-layer machines.">
+    <link rel="icon" href="img/IKON-Logo-2.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+/* ===================== CSS VARIABLES ===================== */
+:root {
+    --blue:       #064d81;
+    --blue-mid:   #0072b1;
+    --blue-light: #0095da;
+    --green:      #a6ce39;
+    --white:      #ffffff;
+    --off-white:  #f4f7fb;
+    --text-dark:  #1a1a2e;
+    --text-mid:   #3d3d3d;
+    --text-light: #6b7280;
+    --border:     #dde3ec;
+    --shadow:     0 4px 24px rgba(6,77,129,0.10);
+    --shadow-hover: 0 12px 40px rgba(6,77,129,0.18);
+    --radius:     14px;
+    --max-width:  1240px;
+    --font-head:  'Barlow Condensed', sans-serif;
+    --font-body:  'Barlow', sans-serif;
+    --transition: 0.28s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ===================== RESET ===================== */
+a { text-decoration: none !important; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ul { list-style: none; }
+a { text-decoration: none !important; color: inherit; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); color: var(--text-dark); background: var(--white); overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+ul { list-style: none; }
+
+/* ===================== PRE-HEADER BAR ===================== */
+.pre-header {
+    background: var(--blue);
+    color: var(--white);
+    font-size: 0.8rem;
+    padding: 7px 0;
+    border-bottom: 2px solid var(--blue-light);
+}
+.pre-header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+.pre-header-text { font-weight: 500; letter-spacing: 0.05em; opacity: 0.9; }
+.pre-header-socials { display: flex; gap: 10px; }
+.pre-header-socials a {
+    color: var(--white);
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.35);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.72rem;
+    transition: background var(--transition), border-color var(--transition);
+}
+.pre-header-socials a:hover { background: var(--green); border-color: var(--green); }
+
+/* ===================== HEADER / NAV ===================== */
+header {
+    position: sticky; top: 0; z-index: 1000;
+    background: var(--white);
+    box-shadow: 0 2px 16px rgba(6,77,129,0.10);
+}
+.navbar {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+.nav-brand { display: flex; align-items: center; gap: 12px; }
+.nav-brand img { height: 48px; }
+.nav-brand-text {
+    font-family: var(--font-head);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--blue);
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+}
+.nav-brand-text span { color: var(--blue-light); }
+
+.nav-links { display: flex; align-items: center; gap: 6px; }
+.nav-links > a, .nav-links > .dropdown > a {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: color var(--transition), background var(--transition);
+    white-space: nowrap;
+}
+.nav-links > a:hover, .nav-links > .dropdown > a:hover { color: var(--blue); background: var(--off-white); }
+.nav-links a.active { color: var(--blue); }
+
+.dropdown { position: relative; }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    background: var(--white);
+    min-width: 240px;
+    border-radius: var(--radius);
+    box-shadow: 0 12px 40px rgba(6,77,129,0.15);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    z-index: 200;
+}
+.dropdown:hover .dropdown-content { display: block; }
+.dropdown-content a {
+    display: block;
+    padding: 10px 18px;
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    border-bottom: 1px solid var(--border);
+    transition: background var(--transition), color var(--transition);
+}
+.dropdown-content a:last-child { border-bottom: none; }
+.dropdown-content a:hover { background: var(--off-white); color: var(--blue); padding-left: 24px; }
+
+.nav-cta {
+    background: var(--green);
+    color: var(--blue) !important;
+    padding: 9px 18px !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    font-size: 0.85rem !important;
+    transition: background var(--transition), transform var(--transition) !important;
+}
+.nav-cta:hover { background: #93bb2e !important; transform: translateY(-1px); }
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--blue);
+    cursor: pointer;
+}
+
+/* ===================== PAGE HERO ===================== */
+.page-hero {
+    height: 260px;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 20px;
+    position: relative;
+}
+.page-hero-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    width: 100%;
+}
+.breadcrumb {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 12px;
+}
+.breadcrumb a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+}
+.breadcrumb a:hover { color: var(--green); }
+.page-hero-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+}
+.page-hero h1 {
+    font-family: var(--font-head);
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.1;
+}
+.page-hero p {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.85);
+    margin-top: 10px;
+    max-width: 600px;
+}
+
+/* ===================== SECTION BASE ===================== */
+.section { padding: 70px 20px; }
+.section-inner { max-width: var(--max-width); margin: 0 auto; }
+.section-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--blue-light);
+    margin-bottom: 10px;
+}
+.section-title {
+    font-family: var(--font-head);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--blue);
+    line-height: 1.1;
+    margin-bottom: 18px;
+}
+.section-title span { color: var(--blue-light); }
+.divider { height: 3px; width: 60px; background: var(--green); border-radius: 2px; margin-bottom: 32px; }
+
+/* ===================== PRODUCT GRID ===================== */
+.products-section { background: var(--off-white); }
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 22px;
+}
+.product-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: box-shadow var(--transition), transform var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+.product-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-6px); }
+.product-card-img {
+    height: 180px;
+    background: var(--off-white);
+    display: flex; align-items: center; justify-content: center;
+}
+.product-card-img .icon-fallback { font-size: 3.5rem; color: var(--blue-light); opacity: 0.5; }
+.product-card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.product-card-body h3 { font-family: var(--font-head); font-size: 1.15rem; font-weight: 700; color: var(--blue); line-height: 1.25; }
+.product-card-body p { font-size: 0.88rem; color: var(--text-mid); line-height: 1.6; }
+.product-card-explore {
+    margin-top: auto;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.84rem; font-weight: 700; color: var(--blue-light);
+    transition: gap var(--transition);
+}
+.product-card:hover .product-card-explore { gap: 10px; }
+
+/* ===================== CTA STRIP ===================== */
+.cta-strip {
+    background: var(--blue);
+    color: var(--white);
+    padding: 60px 20px;
+    text-align: center;
+}
+.cta-strip h2 { font-family: var(--font-head); font-size: 2.2rem; margin-bottom: 16px; }
+.cta-btn {
+    display: inline-block;
+    background: var(--green);
+    color: var(--blue);
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-weight: 700;
+    margin-top: 24px;
+    transition: transform var(--transition), background var(--transition);
+}
+.cta-btn:hover { transform: translateY(-2px); background: #93bb2e; }
+
+/* ===================== FOOTER ===================== */
+footer { background: var(--blue); color: var(--white); padding: 0; }
+.footer-top {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 60px 20px 40px;
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 1.4fr;
+    gap: 40px;
+}
+.footer-brand-logo { height: 48px; margin-bottom: 16px; filter: brightness(0) invert(1); }
+.footer-brand-desc { font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 20px; }
+.footer-socials { display: flex; gap: 10px; }
+.footer-socials a {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--white); font-size: 0.8rem;
+    transition: background var(--transition), border-color var(--transition);
+}
+.footer-socials a:hover { background: var(--green); border-color: var(--green); color: var(--blue); }
+.footer-col h4 { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 18px; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul li a { font-size: 0.88rem; color: rgba(255,255,255,0.75); transition: color var(--transition), padding-left var(--transition); }
+.footer-col ul li a:hover { color: var(--green); padding-left: 4px; }
+.footer-contact-row { display: flex; gap: 10px; margin-bottom: 12px; align-items: flex-start; }
+.footer-contact-icon { color: var(--green); font-size: 0.9rem; margin-top: 3px; flex-shrink: 0; }
+.footer-contact-text { font-size: 0.88rem; color: rgba(255,255,255,0.8); line-height: 1.5; }
+
+.popular-searches {
+    margin: 0 auto;
+    padding: 30px 20px;
+    max-width: var(--max-width);
+    border-top: 1px solid rgba(255,255,255,0.12);
+}
+.popular-searches h5 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+.ps-accordion-item { border-top: 1px solid rgba(255,255,255,0.08); }
+.ps-accordion-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    color: rgba(255,255,255,0.65);
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: var(--font-body);
+    padding: 10px 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color var(--transition);
+}
+.ps-accordion-btn:hover { color: var(--green); }
+.ps-accordion-btn::after { content: '›'; font-size: 1.1rem; flex-shrink: 0; }
+.ps-accordion-content { display: none; padding: 0 0 12px 0; }
+.ps-accordion-content.open { display: block; }
+.ps-accordion-content p { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.65; }
+
+.footer-bottom {
+    padding: 18px 20px;
+    margin: 0;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    text-align: center;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.45);
+    display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;
+}
+.footer-bottom a { color: rgba(255,255,255,0.55); transition: color var(--transition); }
+.footer-bottom a:hover { color: var(--green); }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 900px) {
+    .menu-toggle { display: block; }
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px; left: 0;
+        width: 100%;
+        background: var(--white);
+        padding: 10px 0;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        z-index: 500;
+        text-align: center;
+    }
+    .nav-links.active { display: flex; }
+    .nav-links > a, .nav-links > .dropdown > a { 
+        padding: 15px 20px; 
+        border-bottom: 1px solid var(--border); 
+        border-radius: 0;
+        width: 100%;
+        display: block;
+    }
+    .dropdown-content { position: static; display: none; box-shadow: none; border: none; background: var(--off-white); }
+    .dropdown.active .dropdown-content { display: block; }
+    .footer-top { grid-template-columns: 1fr; gap: 30px; }
+}
+@media (max-width: 600px) {
+    .pre-header-text { display: none; }
+}
+
+.sidebar-links li a { 
+    display: block; 
+    padding: 14px 20px; 
+    font-size: 0.95rem; 
+    border-bottom: 1px solid var(--border); 
+    color: var(--text-mid); 
+    font-weight: 500; 
+    text-decoration: none !important;
+    transition: all var(--transition);
+}
+.sidebar-links li a:hover { 
+    background: var(--off-white); 
+    color: var(--blue); 
+    padding-left: 26px; 
+    border-left: 4px solid var(--blue-light); 
+}
+.sidebar-links li a.active { 
+    background: var(--off-white); 
+    border-left: 4px solid var(--green); 
+    color: var(--blue); 
+    font-weight: 700; 
+}
+.detail-card ul { list-style: none; padding: 0; margin-top: 15px; }
+.detail-card ul li { 
+    position: relative; 
+    padding-left: 28px; 
+    margin-bottom: 12px; 
+    font-size: 0.95rem; 
+    line-height: 1.6; 
+    color: var(--text-mid);
+}
+.detail-card ul li::before { 
+    content: '✔'; 
+    position: absolute; 
+    left: 0; 
+    color: var(--green); 
+    font-weight: 800; 
+    font-size: 1.1rem;
+}
+.spec-table-wrap { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0; }
+.spec-table { width: 100%; border-collapse: collapse; }
+.spec-table th { background: var(--blue); color: white; padding: 14px 20px; text-align: left; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.9rem; }
+.spec-table td { padding: 12px 20px; border-bottom: 1px solid var(--border); color: var(--text-mid); font-size: 0.92rem; }
+.spec-table tr:last-child td { border-bottom: none; }
+.spec-table tr:nth-child(even) { background: #f9fafb; }
+.spec-table tr:hover { background: #f1f5f9; }</style>
+</head>
+<body>
+<!-- PRE-HEADER BAR -->
+<div class="pre-header">
+    <div class="pre-header-inner">
+        <span class="pre-header-text">Welcome to IKON Business Products &amp; Solutions</span>
+        <div class="pre-header-socials">
+            <a href="https://www.facebook.com/ikonbps" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/ikon_bps/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/ikon-business-products-and-solutions/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.youtube.com/@IKON_BPS" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+</div>
+
+<!-- HEADER -->
+<header>
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <img src="img/IKON-Logo-2.png" alt="IKON Logo">
+            <span class="nav-brand-text">IKON <span>Business Products &amp; Solutions</span></span>
+        </a>
+        <button class="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html" class="active">Home</a>
+
+            <div class="dropdown">
+                <a href="index.html#product-center-page">Product Center ▾</a>
+                <div class="dropdown-content">
+                    <a href="cnc-oscillating-knife.html">CNC Oscillating Knife Cutting Machine</a>
+                    <a href="cnc-router.html">CNC Router</a>
+                    <a href="cnc-multi-layer.html">CNC Multi-Layer Cutting Machine</a>
+                    <a href="co2-laser.html">CO2 Laser Cutting Machine</a>
+                    <a href="fiber-laser.html">Fiber Laser Cutting Machine</a>
+                    <a href="spare-parts.html">Spare Parts</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="applications.html">Applications ▾</a>
+                <div class="dropdown-content">
+                    <a href="applications.html?industry=advertising">Advertising</a>
+                    <a href="applications.html?industry=packaging">Packaging</a>
+                    <a href="applications.html?industry=garment">Garment</a>
+                    <a href="applications.html?industry=leather">Leather</a>
+                    <a href="applications.html?industry=automotive-interiors">Automotive Interiors</a>
+                    <a href="applications.html?industry=furniture">Furniture</a>
+                    <a href="applications.html?industry=gasket-sealing">Gasket &amp; Sealing</a>
+                    <a href="applications.html?industry=sound-insulation">Sound Insulation</a>
+                    <a href="applications.html?industry=interior-decor">Interior Decor</a>
+                    <a href="applications.html?industry=stone">Stone</a>
+                    <a href="applications.html?industry=upholstery">Upholstery</a>
+                    <a href="applications.html?industry=woodwork">Woodwork</a>
+                    <a href="applications.html" style="color:var(--blue-light);font-weight:700;border-top:1px solid var(--border);">View All Industries</a>
+                </div>
+            </div>
+            <a href="index.html#about-us-page">About Us</a>
+            <a href="blog-index.html">Blog</a>
+            <a href="index.html#testimonials-page">Testimonials</a>
+            <a href="index.html#contact-us-page" class="nav-cta">Contact Us</a>
+        </div>
+    </nav>
+</header>
+
+
+</div>
+
+<!-- HEADER -->
+
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+    <div class="page-hero-inner">
+        <div class="breadcrumb"><a href="index.html">Home</a> / Product Center</div>
+        <div class="page-hero-label">Our Machines</div>
+        <h1>Product Center</h1>
+        <p>Advanced cutting technology tailored for industrial precision across 20+ sectors.</p>
+    </div>
+</section>
+
+<!-- PRODUCT CENTER CONTENT -->
+<section class="section products-section">
+    <div class="section-inner">
+        <div class="section-label">EXPLORE BY MACHINE</div>
+        <h2 class="section-title">Choose Your <span>Machine</span></h2>
+        <div class="divider"></div>
+
+        <div class="products-grid">
+            <!-- Card 1 -->
+            <a href="cnc-oscillating-knife.html" class="product-card">
+                <div class="product-card-img">
+                    <img src="img/products/CNC Oscillating Knifecut Machine.png" alt="CNC Oscillating Knife Machine">
+                </div>
+                <div class="product-card-body">
+                    <h3>CNC Oscillating Knife Cutting Machine</h3>
+                    <p>Precision die-less cutting for advertising, leather, garment, packaging and more.</p>
+                    <span class="product-card-explore">Explore Verticals →</span>
+                </div>
+            </a>
+
+            <!-- Card 2 -->
+            <a href="cnc-multi-layer.html" class="product-card">
+                <div class="product-card-img">
+                    <img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="CNC Multi-Layer Cutting Machine">
+                </div>
+                <div class="product-card-body">
+                    <h3>CNC Multi-Layer Cutting Machine</h3>
+                    <p>High-throughput multi-ply cutting for textiles, composites, and industrial fabrics.</p>
+                    <span class="product-card-explore">Explore Verticals →</span>
+                </div>
+            </a>
+
+            <!-- Card 3 -->
+            <a href="co2-laser.html" class="product-card">
+                <div class="product-card-img">
+                    <img src="img/products/CO2 Laser Cutting Machine..png" alt="CO2 Laser Machine">
+                </div>
+                <div class="product-card-body">
+                    <h3>CO2 Laser Machine</h3>
+                    <p>Versatile CO2 laser for non-metallic cutting and engraving across signage, gaskets, print, and flooring.</p>
+                    <span class="product-card-explore">Explore Verticals →</span>
+                </div>
+            </a>
+
+            <!-- Card 4 -->
+            <a href="cnc-router.html" class="product-card">
+                <div class="product-card-img">
+                    <img src="img/products/CNC Router..png" alt="CNC Router">
+                </div>
+                <div class="product-card-body">
+                    <h3>CNC Router</h3>
+                    <p>Robust CNC routing for woodworking, furniture, stone, and architectural applications.</p>
+                    <span class="product-card-explore">Explore Verticals →</span>
+                </div>
+            </a>
+
+            <!-- Card 5 -->
+            <a href="fiber-laser.html" class="product-card">
+                <div class="product-card-img">
+                    <img src="img/products/Fiber Laser Cutting Machine..png" alt="Fiber Laser Machine">
+                </div>
+                <div class="product-card-body">
+                    <h3>Fiber Laser Machine</h3>
+                    <p>High-speed fiber laser metal cutting for steel, aluminium, copper, and precision sheet metal.</p>
+                    <span class="product-card-explore">Explore Verticals →</span>
+                </div>
+            </a>
+
+            <!-- Card 6 -->
+            <a href="spare-parts.html" class="product-card">
+                <div class="product-card-img">
+                    <div class="icon-fallback"><i class="fa-solid fa-toolbox"></i></div>
+                </div>
+                <div class="product-card-body">
+                    <h3>Spare Parts</h3>
+                    <p>Genuine replacement parts for all IKON machines to ensure peak performance and uptime.</p>
+                    <span class="product-card-explore">Explore Details →</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA STRIP -->
+<section class="cta-strip">
+    <div class="section-inner">
+        <h2>Can't find what you're looking for?</h2>
+        <p>Our team can help you find the perfect machine for your specific material and production needs.</p>
+        <a href="mailto:shobha@ikonbps.in" class="cta-btn">Contact Our Experts</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-top">
+        <!-- Brand -->
+        <div>
+            <img src="img/IKON-Logo-2.png" alt="IKON Logo" class="footer-brand-logo">
+            <p class="footer-brand-desc">IKON Business Products &amp; Solutions is dedicated to providing cutting-edge solutions for various industries, ensuring efficiency and excellence in every product. Our team of passionate experts is committed to pushing the boundaries of technology.</p>
+            <div class="footer-socials">
+                <a href="https://www.facebook.com/ikonbps" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/ikon_bps/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/ikon-business-products-and-solutions/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.youtube.com/@IKON_BPS" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <!-- Quick Links -->
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#product-center-page">Product Center</a></li>
+                <li><a href="index.html#application-industries-page">Applications</a></li>
+                <li><a href="index.html#about-us-page">About Us</a></li>
+                <li><a href="blog-index.html">Blog</a></li>
+                <li><a href="index.html#testimonials-page">Testimonials</a></li>
+                <li><a href="index.html#contact-us-page">Contact Us</a></li>
+            </ul>
+        </div>
+        <!-- Contact -->
+        <div class="footer-col">
+            <h4>Contact Us</h4>
+            <div class="footer-contact-row">
+                <i class="fas fa-map-marker-alt footer-contact-icon"></i>
+                <span class="footer-contact-text">B-141, B-Wing, 1st Floor, Kiran Industrial Estate, MG Road, Goregaon West, Mumbai – 400104</span>
+            </div>
+            <div class="footer-contact-row">
+                <i class="fas fa-phone-alt footer-contact-icon"></i>
+                <span class="footer-contact-text"><a href="tel:+917506998077" style="color:inherit;">+91 7506998077</a></span>
+            </div>
+            <div class="footer-contact-row">
+                <i class="fas fa-envelope footer-contact-icon"></i>
+                <span class="footer-contact-text">
+                    <a href="mailto:shobha@ikonbps.in" style="color:inherit;">shobha@ikonbps.in</a><br>
+                    <a href="mailto:muralidharan@ikonbps.in" style="color:inherit;">muralidharan@ikonbps.in</a>
+                </span>
+            </div>
+            <div class="footer-contact-row">
+                <i class="fab fa-whatsapp footer-contact-icon"></i>
+                <span class="footer-contact-text"><a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" style="color:inherit;">Chat on WhatsApp</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popular Searches -->
+    <div class="popular-searches">
+        <h5>Popular Searches</h5>
+        <div class="ps-accordion-item">
+            <button class="ps-accordion-btn">CNC Oscillating Knife Cutting Machine</button>
+            <div class="ps-accordion-content">
+                <p>IKON BPS has supplied high-precision CNC Oscillating Knife Cutting Machines to manufacturers in Mumbai, Pune, Delhi, Bangalore, Chennai, Hyderabad, Ahmedabad, Kolkata, Surat, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad, Nagpur, Kanpur, Lucknow, Visakhapatnam, Patna, Ghaziabad, Agra, Faridabad, Meerut, Varanasi, Gurgaon, Noida and many more cities across India.</p>
+            </div>
+        </div>
+        <div class="ps-accordion-item">
+            <button class="ps-accordion-btn">CNC Router Machine</button>
+            <div class="ps-accordion-content">
+                <p>IKON BPS has supplied robust CNC Router Machines for wood carving and fabrication to clients in Mumbai, Delhi, Bangalore, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune, Jaipur, Surat, Lucknow, Kanpur, Nagpur, Visakhapatnam, Indore, Bhopal, Vadodara, Ghaziabad, Ludhiana, Agra, Nashik, Faridabad, Meerut, Rajkot and across the country.</p>
+            </div>
+        </div>
+        <div class="ps-accordion-item">
+            <button class="ps-accordion-btn">Digital Flatbed Cutter (Packaging &amp; Gaskets)</button>
+            <div class="ps-accordion-content">
+                <p>IKON BPS has supplied advanced Digital Flatbed Cutters for corrugated boxes and gasket manufacturing to businesses in Mumbai, Pune, Delhi, Bangalore, Chennai, Hyderabad, Ahmedabad, Kolkata, Surat, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad, Nagpur and more.</p>
+            </div>
+        </div>
+        <div class="ps-accordion-item">
+            <button class="ps-accordion-btn">Textile &amp; Garment Cutting Machine</button>
+            <div class="ps-accordion-content">
+                <p>IKON BPS has supplied state-of-the-art Automatic Fabric Cutters and Digital Fabric Cutting Plotters to textile hubs in Mumbai, Delhi, Bangalore, Surat, Pune, Jaipur, Ludhiana, Tirupur, Coimbatore, Erode, Salem, Bhilwara, Panipat, Varanasi, Kanpur, Agra, Ambur, Ranipet and Jalandhar.</p>
+            </div>
+        </div>
+        <div class="ps-accordion-item">
+            <button class="ps-accordion-btn">Laser Cutting Solutions</button>
+            <div class="ps-accordion-content">
+                <p>IKON BPS has supplied versatile CO2 and Fiber Laser Metal Cutting Machines for precision engineering to industries in Mumbai, Delhi, Bangalore, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad and Nagpur.</p>
+            </div>
+        </div>
+        <div class="ps-accordion-item">
+            <button class="ps-accordion-btn">Specialized Applications</button>
+            <div class="ps-accordion-content">
+                <p>IKON BPS has supplied specialized cutting solutions for Sound Insulation, Automotive Interiors, Carpets, and Composite Materials to key markets in Mumbai, Pune, Delhi, Chennai, Sanand, Bhadohi, Mirzapur, Jaipur, Panipat, Srinagar, Bangalore and Hyderabad.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <span>&copy; 2025 IKON Business Products &amp; Solutions. All Rights Reserved.</span>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+    </div>
+</footer>
+
+<script>
+// Mobile menu
+const menuToggle = document.querySelector('.menu-toggle');
+if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.toggle('active');
+    });
+}
+
+// Mobile dropdowns
+document.querySelectorAll('.dropdown > a').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+        if (window.innerWidth <= 900) {
+            e.preventDefault();
+            anchor.parentElement.classList.toggle('active');
+        }
+    });
+});
+
+// Popular searches accordion
+document.querySelectorAll('.ps-accordion-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const content = btn.nextElementSibling;
+        const isOpen = content.classList.contains('open');
+        document.querySelectorAll('.ps-accordion-content').forEach(c => c.classList.remove('open'));
+        if (!isOpen) content.classList.add('open');
+    });
+});
+</script>
+</body>
+</html>

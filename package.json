@@ -1,0 +1,12 @@
+{
+  "name": "yash-father-website",
+  "version": "1.0.0",
+  "description": "IKON Business Products & Solutions - Intelligent Cutting Solutions",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve ."
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}
