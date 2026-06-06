@@ -73,7 +73,17 @@ function goTo(n) {
     heroSlides[current].classList.add('active');
     if (dotsContainer) dotsContainer.children[current].classList.add('active');
     const vid = heroSlides[current].querySelector('video');
-    if (vid) { vid.currentTime = 0; vid.play(); }
+    if (vid) { 
+        vid.currentTime = 0; 
+        const playPromise = vid.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                // Video playback was interrupted (likely by browser power saving)
+                // We catch this to prevent the red error in the console
+                console.log("Hero video playback paused/interrupted.");
+            });
+        }
+    }
 }
 
 if (heroSlides.length > 0) setInterval(() => goTo((current + 1) % heroSlides.length), 5000);
