@@ -18,6 +18,39 @@
     --transition: 0.28s cubic-bezier(0.4,0,0.2,1);
 }
 
+/* Dark theme variables */
+[data-theme="dark"] {
+    --blue:       #2a8bc9;
+    --blue-mid:   #1c6ea4;
+    --blue-light: #4aa9e0;
+    --green:      #b8d74a;
+    --white:      #1a1a2e;
+    --off-white:  #2d2d44;
+    --text-dark:  #f0f0f0;
+    --text-mid:   #d0d0d0;
+    --text-light: #a0a0b0;
+    --border:     #3d3d5c;
+    --shadow:     0 4px 24px rgba(0,0,0,0.25);
+    --shadow-hover: 0 12px 40px rgba(0,0,0,0.35);
+}
+
+/* Smooth theme transitions */
+body,
+header,
+.pre-header,
+.navbar,
+.nav-links > a,
+.nav-links > .dropdown > a,
+.product-card,
+.testimonial-card,
+.contact-card,
+.footer {
+    transition: background-color var(--transition), 
+                color var(--transition), 
+                border-color var(--transition), 
+                box-shadow var(--transition);
+}
+
 /* ===================== RESET ===================== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }

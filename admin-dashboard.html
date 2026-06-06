@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - IKON Business Products & Solutions</title>
+    <link rel="icon" href="img/IKON-Logo-2.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .dashboard-header {
+            background: var(--blue);
+            color: var(--white);
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .dashboard-card h3 {
+            color: var(--blue);
+            margin-bottom: 15px;
+            font-family: var(--font-head);
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--green);
+            margin: 10px 0;
+        }
+        
+        .metric-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .metric-trend {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .trend-up {
+            background: rgba(166, 206, 57, 0.2);
+            color: var(--green);
+        }
+        
+        .trend-down {
+            background: rgba(255, 99, 132, 0.2);
+            color: #ff6384;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .data-table th {
+            background: var(--off-white);
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--blue);
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .data-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .data-table tr:hover {
+            background: var(--off-white);
+        }
+        
+        .chart-container {
+            height: 300px;
+            margin-top: 20px;
+        }
+        
+        .dashboard-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            padding: 10px 20px;
+            background: var(--off-white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all var(--transition);
+        }
+        
+        .nav-btn.active {
+            background: var(--blue);
+            color: var(--white);
+            border-color: var(--blue);
+        }
+        
+        .nav-btn:hover:not(.active) {
+            background: var(--border);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .warning-badge {
+            background: #ff9800;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .success-badge {
+            background: var(--green);
+            color: var(--blue);
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="nav-brand">
+                <img src="img/IKON-Logo-2.png" alt="IKON Logo">
+                <span class="nav-brand-text">IKON <span>Business Products & Solutions</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="admin-dashboard.html" class="active">Dashboard</a>
+                <a href="index.html#contact-us-page">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1><i class="fas fa-chart-line"></i> Admin Dashboard</h1>
+            <p>Monitor website performance, user engagement, and business metrics</p>
+        </div>
+        
+        <div class="dashboard-nav">
+            <button class="nav-btn active" data-tab="overview">Overview</button>
+            <button class="nav-btn" data-tab="performance">Performance</button>
+            <button class="nav-btn" data-tab="users">User Analytics</button>
+            <button class="nav-btn" data-tab="content">Content Insights</button>
+            <button class="nav-btn" data-tab="settings">Settings</button>
+        </div>
+        
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>Performance Score <span class="warning-badge" id="performance-score-badge">Loading...</span></h3>
+                    <div class="metric-value" id="performance-score">--</div>
+                    <div class="metric-label">Core Web Vitals</div>
+                    <div id="performance-details">
+                        <p>LCP: <span id="lcp-metric">--</span>ms</p>
+                        <p>FID: <span id="fid-metric">--</span>ms</p>
+                        <p>CLS: <span id="cls-metric">--</span></p>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3>User Engagement</h3>
+                    <div class="metric-value" id="active-users">--</div>
+                    <div class="metric-label">Active Users (Last 24h)</div>
+                    <div class="metric-trend trend-up" id="user-trend">+12%</div>
+                    <div class="chart-container">
+                        <canvas id="engagement-chart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3>Conversion Rate</h3>
+                    <div class="metric-value" id="conversion-rate">--</div>
+                    <div class="metric-label">Contact Form Submissions</div>
+                    <p>Total submissions: <span id="total-submissions">--</span></p>
+                    <p>Last submission: <span id="last-submission">--</span></p>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3>Popular Products</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Views</th>
+                                <th>Inquiries</th>
+                            </tr>
+                        </thead>
+                        <tbody id="popular-products">
+                            <tr><td colspan="3">Loading data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <h3>Recent Activity</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>User</th>
+                            <th>Action</th>
+                            <th>Page</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-activity">
+                        <tr><td colspan="4">Loading activity data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Performance Tab -->
+        <div id="performance" class="tab-content">
+            <div class="dashboard-card">
+                <h3>Performance Metrics</h3>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h4>Page Load Time</h4>
+                        <div class="metric-value" id="page-load-time">--</div>
+                        <div class="metric-label">Average (ms)</div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h4>Time to First Byte</h4>
+                        <div class="metric-value" id="ttfb-metric">--</div>
+                        <div class="metric-label">Average (ms)</div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h4>First Contentful Paint</h4>
+                        <div class="metric-value" id="fcp-metric">--</div>
+                        <div class="metric-label">Average (ms)</div>
+                    </div>
+                </div>
+                
+                <h4 style="margin-top: 30px;">Optimization Suggestions</h4>
+                <div id="optimization-suggestions">
+                    <p>Loading suggestions...</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- User Analytics Tab -->
+        <div id="users" class="tab-content">
+            <div class="dashboard-card">
+                <h3>User Demographics</h3>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h4>New vs Returning</h4>
+                        <div class="chart-container">
+                            <canvas id="user-type-chart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h4>Device Breakdown</h4>
+                        <div class="chart-container">
+                            <canvas id="device-chart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h4>Geographic Distribution</h4>
+                        <div id="geo-data">
+                            <p>Top locations:</p>
+                            <ul id="top-locations">
+                                <li>Loading...</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4>User Behavior Patterns</h4>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Pattern</th>
+                            <th>Frequency</th>
+                            <th>Average Session</th>
+                            <th>Conversion Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody id="behavior-patterns">
+                        <tr><td colspan="4">Loading behavior data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Content Insights Tab -->
+        <div id="content" class="tab-content">
+            <div class="dashboard-card">
+                <h3>Content Performance</h3>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h4>Most Viewed Pages</h4>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Page</th>
+                                    <th>Views</th>
+                                    <th>Avg. Time</th>
+                                </tr>
+                            </thead>
+                            <tbody id="top-pages">
+                                <tr><td colspan="3">Loading page data...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <h4>Bounce Rate Analysis</h4>
+                        <div class="metric-value" id="bounce-rate">--</div>
+                        <div class="metric-label">Overall Bounce Rate</div>
+                        <p>High bounce pages:</p>
+                        <ul id="high-bounce-pages">
+                            <li>Loading...</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h4>Content Recommendations</h4>
+                <div id="content-recommendations">
+                    <p>Based on user behavior, consider creating content about:</p>
+                    <ul id="recommended-topics">
+                        <li>Loading recommendations...</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Settings Tab -->
+        <div id="settings" class="tab-content">
+            <div class="dashboard-card">
+                <h3>Dashboard Settings</h3>
+                
+                <div style="margin: 20px 0;">
+                    <h4>Data Collection Settings</h4>
+                    <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 15px;">
+                        <label style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="enable-analytics" checked>
+                            <span>Enable Google Analytics tracking</span>
+                        </label>
+                        
+                        <label style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="enable-user-tracking" checked>
+                            <span>Enable user behavior tracking</span>
+                        </label>
+                        
+                        <label style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="enable-performance-monitoring" checked>
+                            <span>Enable performance monitoring</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <h4>Dashboard Preferences</h4>
+                    <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 15px;">
+                        <div>
+                            <label for="refresh-interval">Auto-refresh interval:</label>
+                            <select id="refresh-interval" style="margin-left: 10px; padding: 5px 10px;">
+                                <option value="30000">30 seconds</option>
+                                <option value="60000" selected>1 minute</option>
+                                <option value="300000">5 minutes</option>
+                                <option value="0">Manual refresh only</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="theme-select">Dashboard theme:</label>
+                            <select id="theme-select" style="margin-left: 10px; padding: 5px 10px;">
+                                <option value="light">Light</option>
+                                <option value="dark">Dark</option>
+                                <option value="auto">Auto (system preference)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <h4>Data Management</h4>
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button id="export-data" class="nav-btn">
+                            <i class="fas fa-download"></i> Export Data
+                        </button>
+                        <button id="clear-cache" class="nav-btn">
+                            <i class="fas fa-trash"></i> Clear Cache
+                        </button>
+                        <button id="reset-settings" class="nav-btn">
+                            <i class="fas fa-redo"></i> Reset Settings
+                        </button>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border);">
+                    <button id="save-settings" class="nav-btn active" style="width: 100%;">
+                        <i class="fas fa-save"></i> Save All Settings
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="padding: 20px; text-align: center; background: var(--blue); color: white; margin-top: 50px;">
+        <p>&copy; 2025 IKON Business Products & Solutions. All Rights Reserved.</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">
+            <a href="index.html" style="color: inherit; margin: 0 10px;">Home</a> |
+            <a href="admin-dashboard.html" style="color: inherit; margin: 0 10px;">Dashboard</a> |
+            <a href="#" id="dashboard-privacy-link" style="color: inherit; margin: 0 10px;">Privacy</a>
+        </p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/user-tracking.js"></script>
+    <script src="js/performance-monitor.js"></script>
+    <script src="js/privacy-controls.js"></script>
+    
+    <script>
+        // Dashboard functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab navigation
+            const navBtns = document.querySelectorAll('.nav-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            navBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Update active button
+                    navBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show active tab
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === tabId) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Load performance data
+            function loadPerformanceData() {
+                if (typeof performanceMonitor !== 'undefined') {
+                    const score = performanceMonitor.getPerformanceScore();
+                    
+                    document.getElementById('performance-score').textContent = score.score + '%';
+                    document.getElementById('lcp-metric').textContent = score.metrics.LCP ? Math.round(score.metrics.LCP) : '--';
+                    document.getElementById('fid-metric').textContent = score.metrics.FID ? Math.round(score.metrics.FID) : '--';
+                    document.getElementById('cls-metric').textContent = score.metrics.CLS ? score.metrics.CLS.toFixed(3) : '--';
+                    
+                    // Update badge
+                    const badge = document.getElementById('performance-score-badge');
+                    if (score.score >= 90) {
+                        badge.className = 'success-badge';
+                        badge.textContent = 'Excellent';
+                    } else if (score.score >= 70) {
+                        badge.className = 'warning-badge';
+                        badge.textContent = 'Good';
+                    } else {
+                        badge.className = 'warning-badge';
+                        badge.textContent = 'Needs Improvement';
+                    }
+                }
+                
+                // Simulate other metrics
+                document.getElementById('active-users').textContent = Math.floor(Math.random() * 100) + 50;
+                document.getElementById('conversion-rate').textContent = (Math.random() * 10).toFixed(1) + '%';
+                document.getElementById('total-submissions').textContent = Math.floor(Math.random() * 50) + 20;
+                document.getElementById('last-submission').textContent = new Date(Date.now() - Math.random() * 86400000).toLocaleString();
+                document.getElementById('page-load-time').textContent = Math.floor(Math.random() * 500) + 800;
+                document.getElementById('ttfb-metric').textContent = Math.floor(Math.random() * 300) + 200;
+                document.getElementById('fcp-metric').textContent = Math.floor(Math.random() * 1000) + 1200;
+                document.getElementById('bounce-rate').textContent = (Math.random() * 30 + 40).toFixed(1) + '%';
+            }
+            
+            // Load initial data
+            loadPerformanceData();
+            
+            // Set up auto-refresh
+            const refreshInterval = document.getElementById('refresh-interval');
+            let refreshTimer;
+            
+            function setupAutoRefresh() {
+                if (refreshTimer) {
+                    clearInterval(refreshTimer);
+                }
+                
+                const interval = parseInt(refreshInterval.value);
+                if (interval > 0) {
+                    refreshTimer = setInterval(loadPerformanceData, interval);
+                }
+            }
+            
+            refreshInterval.addEventListener('change', setupAutoRefresh);
+            setupAutoRefresh();
+            
+            // Privacy link
+            const privacyLink = document.getElementById('dashboard-privacy-link');
+            if (privacyLink && typeof privacyControls !== 'undefined') {
+                privacyLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    privacyControls.showPrivacyModal();
+                });
+            }
+            
+            // Save settings
+            document.getElementById('save-settings').addEventListener('click', function() {
+                alert('Settings saved successfully!');
+                // In a real implementation, this would save to localStorage or backend
+            });
+            
+            // Initialize charts (simplified)
+            setTimeout(function() {
+                // This would be replaced with real chart initialization
+                console.log('Dashboard initialized successfully');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

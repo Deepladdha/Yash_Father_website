@@ -131,3 +131,81 @@ document.querySelectorAll('.ps-accordion-btn').forEach(btn => {
         if (!isOpen) content.classList.add('open');
     });
 });
+
+// User tracking initialization
+if (typeof userTracker !== 'undefined') {
+    console.log('User tracking initialized for user:', userTracker.userId);
+}
+
+// Theme switcher
+function initThemeSwitcher() {
+    const themeToggle = document.createElement('button');
+    themeToggle.className = 'theme-toggle';
+    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    themeToggle.setAttribute('aria-label', 'Toggle dark/light theme');
+    themeToggle.setAttribute('title', 'Toggle theme');
+    
+    // Position in header
+    const header = document.querySelector('header');
+    if (header) {
+        header.style.position = 'relative';
+        themeToggle.style.position = 'absolute';
+        themeToggle.style.right = '20px';
+        themeToggle.style.top = '50%';
+        themeToggle.style.transform = 'translateY(-50%)';
+        themeToggle.style.zIndex = '1001';
+        themeToggle.style.background = 'var(--blue)';
+        themeToggle.style.color = 'var(--white)';
+        themeToggle.style.border = 'none';
+        themeToggle.style.borderRadius = '50%';
+        themeToggle.style.width = '40px';
+        themeToggle.style.height = '40px';
+        themeToggle.style.cursor = 'pointer';
+        themeToggle.style.display = 'flex';
+        themeToggle.style.alignItems = 'center';
+        themeToggle.style.justifyContent = 'center';
+        themeToggle.style.fontSize = '1.2rem';
+        
+        header.appendChild(themeToggle);
+        
+        // Toggle functionality
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            // Update icon
+            themeToggle.innerHTML = newTheme === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+            
+            // Apply theme
+            if (typeof userTracker !== 'undefined') {
+                userTracker.setTheme(newTheme);
+            } else {
+                document.documentElement.setAttribute('data-theme', newTheme);
+                try {
+                    localStorage.setItem('theme', newTheme);
+                } catch (e) {
+                    console.warn('Failed to save theme:', e);
+                }
+            }
+            
+            // Track theme change
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'theme_change', {
+                    theme: newTheme,
+                    user_id: typeof userTracker !== 'undefined' ? userTracker.userId : 'unknown'
+                });
+            }
+        });
+        
+        // Set initial icon based on current theme
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        themeToggle.innerHTML = currentTheme === 'light' ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+    }
+}
+
+// Initialize theme switcher when DOM is loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initThemeSwitcher);
+} else {
+    initThemeSwitcher();
+}
