@@ -34,119 +34,34 @@
     <script src="js/performance-monitor.js"></script>
     <!-- Privacy Controls -->
     <script src="js/privacy-controls.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
 <style>
-/* ===================== CSS VARIABLES ===================== */
-:root {
-    --blue:       #064d81;
-    --blue-mid:   #0072b1;
-    --blue-light: #0095da;
-    --green:      #a6ce39;
-    --white:      #ffffff;
-    --off-white:  #f4f7fb;
-    --text-dark:  #1a1a2e;
-    --text-mid:   #3d3d3d;
-    --text-light: #6b7280;
-    --border:     #dde3ec;
-    --shadow:     0 4px 24px rgba(6,77,129,0.10);
-    --shadow-hover: 0 12px 40px rgba(6,77,129,0.18);
-    --radius:     14px;
-    --max-width:  1240px;
-    --font-head:  'Barlow Condensed', sans-serif;
-    --font-body:  'Barlow', sans-serif;
-    --transition: 0.28s cubic-bezier(0.4,0,0.2,1);
+/* Sidebar and product-specific styles remain inline as they are page-unique */
+.sidebar-links li a { 
+    display: block; 
+    padding: 14px 20px; 
+    font-size: 0.95rem; 
+    border-bottom: 1px solid var(--border); 
+    color: var(--text-mid); 
+    font-weight: 500; 
+    text-decoration: none !important;
+    transition: all var(--transition);
 }
-
-/* ===================== RESET ===================== */
-a { text-decoration: none !important; }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-ul { list-style: none; }
-a { text-decoration: none !important; color: inherit; }
-html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); color: var(--text-dark); background: var(--white); overflow-x: hidden; }
-a { text-decoration: none; color: inherit; }
-img { max-width: 100%; display: block; }
-ul { list-style: none; }
-
-/* ===================== PRE-HEADER BAR ===================== */
-/* ===================== PRE-HEADER BAR ===================== */
-.pre-header {
-    background: var(--blue);
-    color: var(--white);
-    font-size: 0.8rem;
-    padding: 7px 0;
-    border-bottom: 2px solid var(--blue-light);
+.sidebar-links li a:hover { 
+    background: var(--off-white); 
+    color: var(--blue); 
+    padding-left: 26px; 
+    border-left: 4px solid var(--blue-light); 
 }
-.pre-header-inner {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
+.sidebar-links li a.active { 
+    background: var(--off-white); 
+    border-left: 4px solid var(--green); 
+    color: var(--blue); 
+    font-weight: 700; 
 }
-.pre-header-text { font-weight: 500; letter-spacing: 0.05em; opacity: 0.9; }
-.pre-header-socials { display: flex; gap: 10px; }
-.pre-header-socials a {
-    color: var(--white);
-    width: 26px; height: 26px;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.35);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.72rem;
-    transition: background var(--transition), border-color var(--transition);
-}
-.pre-header-socials a:hover { background: var(--green); border-color: var(--green); }
-
-/* ===================== HEADER / NAV ===================== */
-header {
-    position: sticky; top: 0; z-index: 1000;
-    background: var(--white);
-    box-shadow: 0 2px 16px rgba(6,77,129,0.10);
-}
-.navbar {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 20px;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-}
-.nav-brand { display: flex; align-items: center; gap: 12px; }
-.nav-brand img { height: 48px; }
-.nav-brand-text {
-    font-family: var(--font-head);
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--blue);
-    letter-spacing: 0.02em;
-    line-height: 1.2;
-}
-.nav-brand-text span { color: var(--blue-light); }
-
-/* Nav links */
-.nav-links { display: flex; align-items: center; gap: 6px; }
-.nav-links > a, .nav-links > .dropdown > a {
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--text-dark);
-    padding: 8px 12px;
-    border-radius: 6px;
-    transition: color var(--transition), background var(--transition);
-    white-space: nowrap;
-}
-.nav-links > a:hover, .nav-links > .dropdown > a:hover { color: var(--blue); background: var(--off-white); }
-.nav-links a.active { color: var(--blue); }
-
-/* Dropdown */
-.dropdown { position: relative; }
-.dropdown-content {
-    display: none;
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
+</style>
     background: var(--white);
     min-width: 240px;
     border-radius: var(--radius);
@@ -436,6 +351,40 @@ footer { background: var(--blue); color: var(--white); padding: 0; }
 .spec-table tr:hover { background: #f1f5f9; }</style>
 </head>
 <body>
+    <header>
+        <div class="navbar">
+            <div class="nav-brand">
+                <img src="img/IKON-Logo-2.png" alt="IKON Logo">
+                <div class="nav-brand-text">IKON Business Products <span>& Solutions</span></div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <div class="dropdown">
+                    <a href="product-center.html" class="active">Product Center <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="cnc-oscillating-knife.html">CNC Oscillating Knife</a>
+                        <a href="cnc-multi-layer.html">CNC Multi-Layer</a>
+                        <a href="co2-laser.html">CO2 Laser</a>
+                        <a href="fiber-laser.html">Fiber Laser</a>
+                        <a href="spare-parts.html">Spare Parts</a>
+                    </div>
+                </div>
+                <a href="applications.html">Applications</a>
+                <a href="about-us.html">About Us</a>
+                <a href="contact-form.html" class="nav-cta">Contact Us</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / <a href="product-center.html">Product Center</a> / CO2 Laser
+            </div>
+            <h1>CO2 Laser Cutting Machine</h1>
+            <p>Versatile non-metallic cutting and engraving solutions for signage, gaskets, and industrial applications.</p>
+        </div>
+    </div>
 <!-- PRE-HEADER BAR -->
 <div class="pre-header">
     <div class="pre-header-inner">
