@@ -72,6 +72,12 @@ class PrivacyControls {
     }
 
     showConsentBanner() {
+        // Ensure body exists before trying to append
+        if (!document.body) {
+            window.addEventListener('DOMContentLoaded', () => this.showConsentBanner());
+            return;
+        }
+
         const banner = document.createElement('div');
         banner.id = 'privacy-consent-banner';
         banner.style.cssText = `

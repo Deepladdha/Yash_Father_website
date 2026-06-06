@@ -87,8 +87,10 @@ class PerformanceMonitor {
             this.logMetric('TTFB', this.metrics.TTFB);
             
             // Log overall page load time
-            const loadTime = timing.loadEventEnd - timing.navigationStart;
-            console.log(`Page loaded in ${loadTime}ms`);
+            const loadTime = Math.max(0, timing.loadEventEnd - timing.navigationStart);
+            if (loadTime > 0) {
+                console.log(`Page loaded in ${loadTime}ms`);
+            }
             
             // Send to analytics if available
             if (typeof gtag !== 'undefined') {
