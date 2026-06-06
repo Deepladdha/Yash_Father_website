@@ -17,7 +17,7 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-1TBGXB2829');
+        gtag('config', 'G-1TBGXB2829', { 'debug_mode': true });
         
         // Track page views with additional parameters
         gtag('event', 'page_view', {
@@ -35,20 +35,85 @@
     <!-- Privacy Controls -->
     <script src="js/privacy-controls.js"></script>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Sidebar and product-specific styles remain inline as they are page-unique */
+        .sidebar-links li a { 
+            display: block; 
+            padding: 14px 20px; 
+            font-size: 0.95rem; 
+            border-bottom: 1px solid var(--border); 
+            color: var(--text-mid); 
+            font-weight: 500; 
+            text-decoration: none !important;
+            transition: all var(--transition);
+        }
+        .sidebar-links li a:hover { 
+            background: var(--off-white); 
+            color: var(--blue); 
+            padding-left: 26px; 
+            border-left: 4px solid var(--blue-light); 
+        }
+        .sidebar-links li a.active { 
+            background: var(--off-white); 
+            border-left: 4px solid var(--green); 
+            color: var(--blue); 
+            font-weight: 700; 
+        }
+        .detail-card ul { list-style: none; padding: 0; margin-top: 15px; }
+        .detail-card ul li { 
+            position: relative; 
+            padding-left: 28px; 
+            margin-bottom: 12px; 
+            font-size: 0.95rem; 
+            line-height: 1.6; 
+            color: var(--text-mid);
+        }
+        .detail-card ul li::before { 
+            content: '✔'; 
+            position: absolute; 
+            left: 0; 
+            color: var(--green); 
+            font-weight: 800; 
+            font-size: 1.1rem;
+        }
+        .spec-table-wrap { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0; }
+        .spec-table { width: 100%; border-collapse: collapse; }
+        .spec-table th { background: var(--blue); color: white; padding: 14px 20px; text-align: left; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.9rem; }
+        .spec-table td { padding: 12px 20px; border-bottom: 1px solid var(--border); color: var(--text-mid); font-size: 0.92rem; }
+        .spec-table tr:last-child td { border-bottom: none; }
+        .spec-table tr:nth-child(even) { background: #f9fafb; }
+        .spec-table tr:hover { background: #f1f5f9; }
+    </style>
 </head>
 <body>
+    <!-- PRE-HEADER BAR -->
+    <div class="pre-header">
+        <div class="pre-header-inner">
+            <span class="pre-header-text">Welcome to IKON Business Products & Solutions</span>
+            <div class="pre-header-socials">
+                <a href="https://www.facebook.com/ikonbps" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/ikon_bps/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/ikon-business-products-and-solutions/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.youtube.com/@IKON_BPS" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="navbar">
             <div class="nav-brand">
                 <img src="img/IKON-Logo-2.png" alt="IKON Logo">
                 <div class="nav-brand-text">IKON Business Products <span>& Solutions</span></div>
             </div>
-            <div class="nav-links">
+            <button class="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+            <div class="nav-links" id="navLinks">
                 <a href="index.html">Home</a>
                 <div class="dropdown">
                     <a href="product-center.html" class="active">Product Center <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-content">
                         <a href="cnc-oscillating-knife.html">CNC Oscillating Knife</a>
+                        <a href="cnc-router.html">CNC Router</a>
                         <a href="cnc-multi-layer.html">CNC Multi-Layer</a>
                         <a href="co2-laser.html">CO2 Laser</a>
                         <a href="fiber-laser.html">Fiber Laser</a>
@@ -71,350 +136,212 @@
             <p>High-precision cutting for diverse industries including Advertising, Packaging, Leather, and Gaskets.</p>
         </div>
     </div>
-<style>
-/* Sidebar and product-specific styles remain inline as they are page-unique */
-.sidebar-links li a { 
-    display: block; 
-    padding: 14px 20px; 
-    font-size: 0.95rem; 
-    border-bottom: 1px solid var(--border); 
-    color: var(--text-mid); 
-    font-weight: 500; 
-    text-decoration: none !important;
-    transition: all var(--transition);
-}
-.sidebar-links li a:hover { 
-    background: var(--off-white); 
-    color: var(--blue); 
-    padding-left: 26px; 
-    border-left: 4px solid var(--blue-light); 
-}
-.sidebar-links li a.active { 
-    background: var(--off-white); 
-    border-left: 4px solid var(--green); 
-    color: var(--blue); 
-    font-weight: 700; 
-}
-.detail-card ul { list-style: none; padding: 0; margin-top: 15px; }
-.detail-card ul li { 
-    position: relative; 
-    padding-left: 28px; 
-    margin-bottom: 12px; 
-    font-size: 0.95rem; 
-    line-height: 1.6; 
-    color: var(--text-mid);
-}
-.detail-card ul li::before { 
-    content: '✔'; 
-    position: absolute; 
-    left: 0; 
-    color: var(--green); 
-    font-weight: 800; 
-    font-size: 1.1rem;
-}
-.spec-table-wrap { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0; }
-.spec-table { width: 100%; border-collapse: collapse; }
-.spec-table th { background: var(--blue); color: white; padding: 14px 20px; text-align: left; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.9rem; }
-.spec-table td { padding: 12px 20px; border-bottom: 1px solid var(--border); color: var(--text-mid); font-size: 0.92rem; }
-.spec-table tr:last-child td { border-bottom: none; }
-.spec-table tr:nth-child(even) { background: #f9fafb; }
-.spec-table tr:hover { background: #f1f5f9; }</style>
-</head>
-<body>
-<!-- PRE-HEADER BAR -->
-<div class="pre-header">
-    <div class="pre-header-inner">
-        <span class="pre-header-text">Welcome to IKON Business Products &amp; Solutions</span>
-        <div class="pre-header-socials">
-            <a href="https://www.facebook.com/ikonbps" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/ikon_bps/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/company/ikon-business-products-and-solutions/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.youtube.com/@IKON_BPS" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+
+    <!-- VERTICALS CONTENT -->
+    <section class="section verticals-section">
+        <div class="section-inner">
+            <div class="section-label">INDUSTRY VERTICALS</div>
+            <h2 class="section-title">Applications</h2>
+            <div class="divider"></div>
+
+            <div class="verticals-grid">
+                <a href="detail-cnc-oscillating-knife.html?app=advertising" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Advertising"></div>
+                    <div class="product-card-body"><h3>Advertising</h3><p>Precision finishing for signs, displays, and acrylics.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+                <a href="detail-cnc-oscillating-knife.html?app=packaging" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Packaging"></div>
+                    <div class="product-card-body"><h3>Packaging</h3><p>Sample making and short-run corrugated box production.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+                <a href="detail-cnc-oscillating-knife.html?app=graphics-and-signage" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Graphics and Signage"></div>
+                    <div class="product-card-body"><h3>Graphics and Signage</h3><p>Contour cut vinyl and stickers with camera accuracy.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+                <a href="detail-cnc-oscillating-knife.html?app=leather" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Leather"></div>
+                    <div class="product-card-body"><h3>Leather</h3><p>Digital nesting and cutting for footwear and bags.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+                <a href="detail-cnc-oscillating-knife.html?app=garment" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Garment"></div>
+                    <div class="product-card-body"><h3>Garment</h3><p>Automated textile cutting for fashion prototyping.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+                <a href="detail-cnc-oscillating-knife.html?app=furniture" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Furniture"></div>
+                    <div class="product-card-body"><h3>Furniture</h3><p>Precision cutting for upholstery and foam cushions.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+                <a href="detail-cnc-oscillating-knife.html?app=automotive-interior" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Automotive Interior"></div>
+                    <div class="product-card-body"><h3>Automotive Interior</h3><p>OEM quality cutting for car mats and seat covers.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+                <a href="detail-cnc-oscillating-knife.html?app=carpet" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Carpet"></div>
+                    <div class="product-card-body"><h3>Carpet</h3><p>Heavy-duty cutting for custom rugs and flooring mats.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+                <a href="detail-cnc-oscillating-knife.html?app=composite" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Composite"></div>
+                    <div class="product-card-body"><h3>Composite</h3><p>Digital precision for carbon fiber and fiberglass.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+                <a href="detail-cnc-oscillating-knife.html?app=gasket" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Gasket"></div>
+                    <div class="product-card-body"><h3>Gasket</h3><p>Die-less cutting for industrial seals and rubber.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+                <a href="detail-cnc-oscillating-knife.html?app=sound-insulation" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Sound Insulation"></div>
+                    <div class="product-card-body"><h3>Sound Insulation</h3><p>Shape PET felt and acoustic foam with clean cuts.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+                <a href="detail-cnc-oscillating-knife.html?app=interior-decor" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Interior Decor"></div>
+                    <div class="product-card-body"><h3>Interior Decor</h3><p>Custom wall panels and screens from semi-rigid materials.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+                <a href="detail-cnc-oscillating-knife.html?app=upholstery" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Upholstery"></div>
+                    <div class="product-card-body"><h3>Upholstery</h3><p>High-speed cutting for furniture covers and leather.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+                <a href="detail-cnc-oscillating-knife.html?app=fabric" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Fabric"></div>
+                    <div class="product-card-body"><h3>Fabric</h3><p>Versatile cutting for industrial and technical textiles.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+                <a href="detail-cnc-oscillating-knife.html?app=foam" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Foam"></div>
+                    <div class="product-card-body"><h3>Foam</h3><p>Specialized cutting for EPE, EVA, and PU foam inserts.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+                <a href="detail-cnc-oscillating-knife.html?app=footware" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Footware"></div>
+                    <div class="product-card-body"><h3>Footware</h3><p>Process leather, mesh, and foam for shoe components.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+                <a href="detail-cnc-oscillating-knife.html?app=bags" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Bags"></div>
+                    <div class="product-card-body"><h3>Bags</h3><p>Cut canvas and nylon for luggage manufacturing.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+                <a href="detail-cnc-oscillating-knife.html?app=flooring" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Flooring"></div>
+                    <div class="product-card-body"><h3>Flooring</h3><p>Versatile cutting for vinyl, rubber, and carpet.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+                <a href="detail-cnc-oscillating-knife.html?app=print" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Print"></div>
+                    <div class="product-card-body"><h3>Print</h3><p>Automated finishing for printed banners and displays.</p><span class="product-card-explore">View Details →</span></div>
+                </a>
+            </div>
         </div>
-    </div>
-</div>
+    </section>
 
-<!-- HEADER -->
-<header>
-    <nav class="navbar">
-        <a href="index.html" class="nav-brand">
-            <img src="img/IKON-Logo-2.png" alt="IKON Logo">
-            <span class="nav-brand-text">IKON <span>Business Products &amp; Solutions</span></span>
-        </a>
-        <button class="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
-        <div class="nav-links" id="navLinks">
-            <a href="index.html" class="active">Home</a>
-
-            <div class="dropdown">
-                <a href="#product-center-page">Product Center ▾</a>
-                <div class="dropdown-content">
-                    <a href="cnc-oscillating-knife.html">CNC Oscillating Knife Cutting Machine</a>
-                    <a href="cnc-router.html">CNC Router</a>
-                    <a href="cnc-multi-layer.html">CNC Multi-Layer Cutting Machine</a>
-                    <a href="co2-laser.html">CO2 Laser Cutting Machine</a>
-                    <a href="fiber-laser.html">Fiber Laser Cutting Machine</a>
-                    <a href="spare-parts.html">Spare Parts</a>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <!-- Brand -->
+            <div>
+                <img src="img/IKON-Logo-2.png" alt="IKON Logo" class="footer-brand-logo">
+                <p class="footer-brand-desc">IKON Business Products & Solutions is dedicated to providing cutting-edge solutions for various industries, ensuring efficiency and excellence in every product. Our team of passionate experts is committed to pushing the boundaries of technology.</p>
+                <div class="footer-socials">
+                    <a href="https://www.facebook.com/ikonbps" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/ikon_bps/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/ikon-business-products-and-solutions/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.youtube.com/@IKON_BPS" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
-            <div class="dropdown">
-                <a href="applications.html">Applications ▾</a>
-                <div class="dropdown-content">
-                    <a href="applications.html?industry=advertising">Advertising</a>
-                    <a href="applications.html?industry=packaging">Packaging</a>
-                    <a href="applications.html?industry=garment">Garment</a>
-                    <a href="applications.html?industry=leather">Leather</a>
-                    <a href="applications.html?industry=automotive-interiors">Automotive Interiors</a>
-                    <a href="applications.html?industry=furniture">Furniture</a>
-                    <a href="applications.html?industry=gasket-sealing">Gasket &amp; Sealing</a>
-                    <a href="applications.html?industry=sound-insulation">Sound Insulation</a>
-                    <a href="applications.html?industry=interior-decor">Interior Decor</a>
-                    <a href="applications.html?industry=stone">Stone</a>
-                    <a href="applications.html?industry=upholstery">Upholstery</a>
-                    <a href="applications.html?industry=woodwork">Woodwork</a>
-                    <a href="applications.html" style="color:var(--blue-light);font-weight:700;border-top:1px solid var(--border);">View All Industries</a>
+            <!-- Quick Links -->
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="product-center.html">Product Center</a></li>
+                    <li><a href="applications.html">Applications</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="blog-index.html">Blog</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="contact-form.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <!-- Contact -->
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <div class="footer-contact-row">
+                    <i class="fas fa-map-marker-alt footer-contact-icon"></i>
+                    <span class="footer-contact-text">B-141, B-Wing, 1st Floor, Kiran Industrial Estate, MG Road, Goregaon West, Mumbai – 400104</span>
+                </div>
+                <div class="footer-contact-row">
+                    <i class="fas fa-phone-alt footer-contact-icon"></i>
+                    <span class="footer-contact-text"><a href="tel:+917506998077" style="color:inherit;">+91 7506998077</a></span>
+                </div>
+                <div class="footer-contact-row">
+                    <i class="fas fa-envelope footer-contact-icon"></i>
+                    <span class="footer-contact-text">
+                        <a href="mailto:shobha@ikonbps.in" style="color:inherit;">shobha@ikonbps.in</a><br>
+                        <a href="mailto:muralidharan@ikonbps.in" style="color:inherit;">muralidharan@ikonbps.in</a>
+                    </span>
+                </div>
+                <div class="footer-contact-row">
+                    <i class="fab fa-whatsapp footer-contact-icon"></i>
+                    <span class="footer-contact-text"><a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" style="color:inherit;">Chat on WhatsApp</a></span>
                 </div>
             </div>
-            <a href="#about-us-page">About Us</a>
-            <a href="blog-index.html">Blog</a>
-            <a href="#testimonials-page">Testimonials</a>
-            <a href="#contact-us-page" class="nav-cta">Contact Us</a>
         </div>
-    </nav>
-</header>
 
-
-</div>
-
-<!-- HEADER -->
-
-
-<!-- PAGE HERO -->
-<section class="page-hero">
-    <div class="page-hero-inner">
-        <div class="breadcrumb"><a href="index.html">Home</a> / <a href="product-center.html">Product Center</a> / CNC Oscillating Knife</div>
-        <h1>CNC Oscillating Knife Cutting Machine</h1>
-        <p>Explore 19 industrial verticals with specialized digital cutting solutions.</p>
-    </div>
-</section>
-
-<!-- VERTICALS CONTENT -->
-<section class="section verticals-section">
-    <div class="section-inner">
-        <div class="section-label">INDUSTRY VERTICALS</div>
-        <h2 class="section-title">Applications</h2>
-        <div class="divider"></div>
-
-        <div class="verticals-grid">
-            <a href="detail-cnc-oscillating-knife.html?app=advertising" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Advertising"></div>
-                <div class="product-card-body"><h3>Advertising</h3><p>Precision finishing for signs, displays, and acrylics.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-            <a href="detail-cnc-oscillating-knife.html?app=packaging" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Packaging"></div>
-                <div class="product-card-body"><h3>Packaging</h3><p>Sample making and short-run corrugated box production.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-            <a href="detail-cnc-oscillating-knife.html?app=graphics-and-signage" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Graphics and Signage"></div>
-                <div class="product-card-body"><h3>Graphics and Signage</h3><p>Contour cut vinyl and stickers with camera accuracy.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-            <a href="detail-cnc-oscillating-knife.html?app=leather" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Leather"></div>
-                <div class="product-card-body"><h3>Leather</h3><p>Digital nesting and cutting for footwear and bags.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-            <a href="detail-cnc-oscillating-knife.html?app=garment" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Garment"></div>
-                <div class="product-card-body"><h3>Garment</h3><p>Automated textile cutting for fashion prototyping.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-            <a href="detail-cnc-oscillating-knife.html?app=furniture" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Furniture"></div>
-                <div class="product-card-body"><h3>Furniture</h3><p>Precision cutting for upholstery and foam cushions.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-            <a href="detail-cnc-oscillating-knife.html?app=automotive-interior" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Automotive Interior"></div>
-                <div class="product-card-body"><h3>Automotive Interior</h3><p>OEM quality cutting for car mats and seat covers.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-            <a href="detail-cnc-oscillating-knife.html?app=carpet" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Carpet"></div>
-                <div class="product-card-body"><h3>Carpet</h3><p>Heavy-duty cutting for custom rugs and flooring mats.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-            <a href="detail-cnc-oscillating-knife.html?app=composite" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Composite"></div>
-                <div class="product-card-body"><h3>Composite</h3><p>Digital precision for carbon fiber and fiberglass.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-            <a href="detail-cnc-oscillating-knife.html?app=gasket" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Gasket"></div>
-                <div class="product-card-body"><h3>Gasket</h3><p>Die-less cutting for industrial seals and rubber.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-            <a href="detail-cnc-oscillating-knife.html?app=sound-insulation" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Sound Insulation"></div>
-                <div class="product-card-body"><h3>Sound Insulation</h3><p>Shape PET felt and acoustic foam with clean cuts.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-            <a href="detail-cnc-oscillating-knife.html?app=interior-decor" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Interior Decor"></div>
-                <div class="product-card-body"><h3>Interior Decor</h3><p>Custom wall panels and screens from semi-rigid materials.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-            <a href="detail-cnc-oscillating-knife.html?app=upholstery" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Upholstery"></div>
-                <div class="product-card-body"><h3>Upholstery</h3><p>High-speed cutting for furniture covers and leather.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-            <a href="detail-cnc-oscillating-knife.html?app=fabric" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Fabric"></div>
-                <div class="product-card-body"><h3>Fabric</h3><p>Versatile cutting for industrial and technical textiles.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-            <a href="detail-cnc-oscillating-knife.html?app=foam" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Foam"></div>
-                <div class="product-card-body"><h3>Foam</h3><p>Specialized cutting for EPE, EVA, and PU foam inserts.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-            <a href="detail-cnc-oscillating-knife.html?app=footware" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Footware"></div>
-                <div class="product-card-body"><h3>Footware</h3><p>Process leather, mesh, and foam for shoe components.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-            <a href="detail-cnc-oscillating-knife.html?app=bags" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Bags"></div>
-                <div class="product-card-body"><h3>Bags</h3><p>Cut canvas and nylon for luggage manufacturing.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-            <a href="detail-cnc-oscillating-knife.html?app=flooring" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Flooring"></div>
-                <div class="product-card-body"><h3>Flooring</h3><p>Versatile cutting for vinyl, rubber, and carpet.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-            <a href="detail-cnc-oscillating-knife.html?app=print" class="product-card">
-                <div class="product-card-img"><img src="img/products/CNC Oscillating Knifecut Machine.png" alt="Print"></div>
-                <div class="product-card-body"><h3>Print</h3><p>Automated finishing for printed banners and displays.</p><span class="product-card-explore">View Details →</span></div>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-    <div class="footer-top">
-        <!-- Brand -->
-        <div>
-            <img src="img/IKON-Logo-2.png" alt="IKON Logo" class="footer-brand-logo">
-            <p class="footer-brand-desc">IKON Business Products &amp; Solutions is dedicated to providing cutting-edge solutions for various industries, ensuring efficiency and excellence in every product. Our team of passionate experts is committed to pushing the boundaries of technology.</p>
-            <div class="footer-socials">
-                <a href="https://www.facebook.com/ikonbps" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/ikon_bps/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/company/ikon-business-products-and-solutions/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.youtube.com/@IKON_BPS" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <!-- Popular Searches -->
+        <div class="popular-searches">
+            <h5>Popular Searches</h5>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">CNC Oscillating Knife Cutting Machine</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied high-precision CNC Oscillating Knife Cutting Machines to manufacturers in Mumbai, Pune, Delhi, Bangalore, Chennai, Hyderabad, Ahmedabad, Kolkata, Surat, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad, Nagpur, Kanpur, Lucknow, Visakhapatnam, Patna, Ghaziabad, Agra, Faridabad, Meerut, Varanasi, Gurgaon, Noida and many more cities across India.</p>
+                </div>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">CNC Router Machine</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied robust CNC Router Machines for wood carving and fabrication to clients in Mumbai, Delhi, Bangalore, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune, Jaipur, Surat, Lucknow, Kanpur, Nagpur, Visakhapatnam, Indore, Bhopal, Vadodara, Ghaziabad, Ludhiana, Agra, Nashik, Faridabad, Meerut, Rajkot and across the country.</p>
+                </div>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">Digital Flatbed Cutter (Packaging & Gaskets)</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied advanced Digital Flatbed Cutters for corrugated boxes and gasket manufacturing to businesses in Mumbai, Pune, Delhi, Bangalore, Chennai, Hyderabad, Ahmedabad, Kolkata, Surat, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad, Nagpur and more.</p>
+                </div>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">Textile & Garment Cutting Machine</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied state-of-the-art Automatic Fabric Cutters and Digital Fabric Cutting Plotters to textile hubs in Mumbai, Delhi, Bangalore, Surat, Pune, Jaipur, Ludhiana, Tirupur, Coimbatore, Erode, Salem, Bhilwara, Panipat, Varanasi, Kanpur, Agra, Ambur, Ranipet and Jalandhar.</p>
+                </div>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">Laser Cutting Solutions</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied versatile CO2 and Fiber Laser Metal Cutting Machines for precision engineering to industries in Mumbai, Delhi, Bangalore, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad and Nagpur.</p>
+                </div>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">Specialized Applications</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied specialized cutting solutions for Sound Insulation, Automotive Interiors, Carpets, and Composite Materials to key markets in Mumbai, Pune, Delhi, Chennai, Manesar, Sanand, Bhadohi, Mirzapur, Jaipur, Panipat, Srinagar, Bangalore and Hyderabad.</p>
+                </div>
             </div>
         </div>
-        <!-- Quick Links -->
-        <div class="footer-col">
-            <h4>Quick Links</h4>
-            <ul>
-                <li><a href="#main-content">Home</a></li>
-                <li><a href="#product-center-page">Product Center</a></li>
-                <li><a href="#application-industries-page">Applications</a></li>
-                <li><a href="#about-us-page">About Us</a></li>
-                <li><a href="blog-index.html">Blog</a></li>
-                <li><a href="#testimonials-page">Testimonials</a></li>
-                <li><a href="#contact-us-page">Contact Us</a></li>
-            </ul>
-        </div>
-        <!-- Contact -->
-        <div class="footer-col">
-            <h4>Contact Us</h4>
-            <div class="footer-contact-row">
-                <i class="fas fa-map-marker-alt footer-contact-icon"></i>
-                <span class="footer-contact-text">B-141, B-Wing, 1st Floor, Kiran Industrial Estate, MG Road, Goregaon West, Mumbai – 400104</span>
-            </div>
-            <div class="footer-contact-row">
-                <i class="fas fa-phone-alt footer-contact-icon"></i>
-                <span class="footer-contact-text"><a href="tel:+917506998077" style="color:inherit;">+91 7506998077</a></span>
-            </div>
-            <div class="footer-contact-row">
-                <i class="fas fa-envelope footer-contact-icon"></i>
-                <span class="footer-contact-text">
-                    <a href="mailto:shobha@ikonbps.in" style="color:inherit;">shobha@ikonbps.in</a><br>
-                    <a href="mailto:muralidharan@ikonbps.in" style="color:inherit;">muralidharan@ikonbps.in</a>
-                </span>
-            </div>
-            <div class="footer-contact-row">
-                <i class="fab fa-whatsapp footer-contact-icon"></i>
-                <span class="footer-contact-text"><a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" style="color:inherit;">Chat on WhatsApp</a></span>
-            </div>
-        </div>
-    </div>
 
-    <!-- Popular Searches -->
-    <div class="popular-searches">
-        <h5>Popular Searches</h5>
-        <div class="ps-accordion-item">
-            <button class="ps-accordion-btn">CNC Oscillating Knife Cutting Machine</button>
-            <div class="ps-accordion-content">
-                <p>IKON BPS has supplied high-precision CNC Oscillating Knife Cutting Machines to manufacturers in Mumbai, Pune, Delhi, Bangalore, Chennai, Hyderabad, Ahmedabad, Kolkata, Surat, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad, Nagpur, Kanpur, Lucknow, Visakhapatnam, Patna, Ghaziabad, Agra, Faridabad, Meerut, Varanasi, Gurgaon, Noida and many more cities across India.</p>
-            </div>
+        <div class="footer-bottom">
+            <span>&copy; 2025 IKON Business Products & Solutions. All Rights Reserved.</span>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
         </div>
-        <div class="ps-accordion-item">
-            <button class="ps-accordion-btn">CNC Router Machine</button>
-            <div class="ps-accordion-content">
-                <p>IKON BPS has supplied robust CNC Router Machines for wood carving and fabrication to clients in Mumbai, Delhi, Bangalore, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune, Jaipur, Surat, Lucknow, Kanpur, Nagpur, Visakhapatnam, Indore, Bhopal, Vadodara, Ghaziabad, Ludhiana, Agra, Nashik, Faridabad, Meerut, Rajkot and across the country.</p>
-            </div>
-        </div>
-        <div class="ps-accordion-item">
-            <button class="ps-accordion-btn">Digital Flatbed Cutter (Packaging &amp; Gaskets)</button>
-            <div class="ps-accordion-content">
-                <p>IKON BPS has supplied advanced Digital Flatbed Cutters for corrugated boxes and gasket manufacturing to businesses in Mumbai, Pune, Delhi, Bangalore, Chennai, Hyderabad, Ahmedabad, Kolkata, Surat, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad, Nagpur and more.</p>
-            </div>
-        </div>
-        <div class="ps-accordion-item">
-            <button class="ps-accordion-btn">Textile &amp; Garment Cutting Machine</button>
-            <div class="ps-accordion-content">
-                <p>IKON BPS has supplied state-of-the-art Automatic Fabric Cutters and Digital Fabric Cutting Plotters to textile hubs in Mumbai, Delhi, Bangalore, Surat, Pune, Jaipur, Ludhiana, Tirupur, Coimbatore, Erode, Salem, Bhilwara, Panipat, Varanasi, Kanpur, Agra, Ambur, Ranipet and Jalandhar.</p>
-            </div>
-        </div>
-        <div class="ps-accordion-item">
-            <button class="ps-accordion-btn">Laser Cutting Solutions</button>
-            <div class="ps-accordion-content">
-                <p>IKON BPS has supplied versatile CO2 and Fiber Laser Metal Cutting Machines for precision engineering to industries in Mumbai, Delhi, Bangalore, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad and Nagpur.</p>
-            </div>
-        </div>
-        <div class="ps-accordion-item">
-            <button class="ps-accordion-btn">Specialized Applications</button>
-            <div class="ps-accordion-content">
-                <p>IKON BPS has supplied specialized cutting solutions for Sound Insulation, Automotive Interiors, Carpets, and Composite Materials to key markets in Mumbai, Pune, Delhi, Chennai, Manesar, Sanand, Bhadohi, Mirzapur, Jaipur, Panipat, Srinagar, Bangalore and Hyderabad.</p>
-            </div>
-        </div>
-    </div>
+    </footer>
 
-    <div class="footer-bottom">
-        <span>&copy; 2025 IKON Business Products &amp; Solutions. All Rights Reserved.</span>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
-    </div>
-</footer>
+    <script src="js/scripts.js"></script>
+    <script>
+        // Popular Searches accordion
+        document.querySelectorAll('.ps-accordion-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const isOpen = content.classList.contains('open');
+                document.querySelectorAll('.ps-accordion-content').forEach(c => c.classList.remove('open'));
+                if (!isOpen) content.classList.add('open');
+            });
+        });
 
-<script>
-// Mobile menu
-const menuToggle = document.querySelector('.menu-toggle');
-if (menuToggle) {
-    menuToggle.addEventListener('click', () => {
-        document.getElementById('navLinks').classList.toggle('active');
-    });
-}
-
-// Mobile dropdowns
-document.querySelectorAll('.dropdown > a').forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
-        if (window.innerWidth <= 900) {
-            e.preventDefault();
-            anchor.parentElement.classList.toggle('active');
-        }
-    });
-});
-
-// Popular searches accordion
-document.querySelectorAll('.ps-accordion-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const content = btn.nextElementSibling;
-        const isOpen = content.classList.contains('open');
-        document.querySelectorAll('.ps-accordion-content').forEach(c => c.classList.remove('open'));
-        if (!isOpen) content.classList.add('open');
-    });
-});
-</script>
+        // Mobile menu
+        document.querySelector('.menu-toggle')?.addEventListener('click', () => {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>

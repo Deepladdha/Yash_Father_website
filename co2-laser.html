@@ -17,7 +17,7 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-1TBGXB2829');
+        gtag('config', 'G-1TBGXB2829', { 'debug_mode': true });
         
         // Track page views with additional parameters
         gtag('event', 'page_view', {
@@ -35,334 +35,61 @@
     <!-- Privacy Controls -->
     <script src="js/privacy-controls.js"></script>
     <link rel="stylesheet" href="css/styles.css">
-</head>
-
-<style>
-/* Sidebar and product-specific styles remain inline as they are page-unique */
-.sidebar-links li a { 
-    display: block; 
-    padding: 14px 20px; 
-    font-size: 0.95rem; 
-    border-bottom: 1px solid var(--border); 
-    color: var(--text-mid); 
-    font-weight: 500; 
-    text-decoration: none !important;
-    transition: all var(--transition);
-}
-.sidebar-links li a:hover { 
-    background: var(--off-white); 
-    color: var(--blue); 
-    padding-left: 26px; 
-    border-left: 4px solid var(--blue-light); 
-}
-.sidebar-links li a.active { 
-    background: var(--off-white); 
-    border-left: 4px solid var(--green); 
-    color: var(--blue); 
-    font-weight: 700; 
-}
-</style>
-    background: var(--white);
-    min-width: 240px;
-    border-radius: var(--radius);
-    box-shadow: 0 12px 40px rgba(6,77,129,0.15);
-    border: 1px solid var(--border);
-    overflow: hidden;
-    z-index: 200;
-}
-.dropdown:hover .dropdown-content { display: block; }
-.dropdown-content a {
-    display: block;
-    padding: 10px 18px;
-    font-size: 0.84rem;
-    font-weight: 500;
-    color: var(--text-dark);
-    border-bottom: 1px solid var(--border);
-    transition: background var(--transition), color var(--transition);
-}
-.dropdown-content a:last-child { border-bottom: none; }
-.dropdown-content a:hover { background: var(--off-white); color: var(--blue); padding-left: 24px; }
-
-/* Nav CTA */
-.nav-cta {
-    background: var(--green);
-    color: var(--blue) !important;
-    padding: 9px 18px !important;
-    border-radius: 8px !important;
-    font-weight: 700 !important;
-    font-size: 0.85rem !important;
-    transition: background var(--transition), transform var(--transition) !important;
-}
-.nav-cta:hover { background: #93bb2e !important; transform: translateY(-1px); }
-
-/* Mobile toggle */
-.menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--blue);
-    cursor: pointer;
-}
-
-/* ===================== PAGE HERO ===================== */
-.page-hero {
-    height: 220px;
-    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 20px;
-    position: relative;
-}
-.page-hero-inner {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    width: 100%;
-}
-.breadcrumb {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.7);
-    margin-bottom: 12px;
-}
-.breadcrumb a {
-    color: rgba(255,255,255,0.85);
-    text-decoration: none;
-}
-.breadcrumb a:hover { color: var(--green); }
-.page-hero h1 {
-    font-family: var(--font-head);
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 800;
-    color: var(--white);
-    line-height: 1.1;
-}
-.page-hero p {
-    font-size: 1.05rem;
-    color: rgba(255,255,255,0.85);
-    margin-top: 10px;
-    max-width: 700px;
-}
-
-/* ===================== SECTION BASE ===================== */
-.section { padding: 70px 20px; }
-.section-inner { max-width: var(--max-width); margin: 0 auto; }
-.section-label {
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--blue-light);
-    margin-bottom: 10px;
-}
-.section-title {
-    font-family: var(--font-head);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    color: var(--blue);
-    line-height: 1.1;
-    margin-bottom: 18px;
-}
-.section-title span { color: var(--blue-light); }
-.divider { height: 3px; width: 60px; background: var(--green); border-radius: 2px; margin-bottom: 32px; }
-
-/* ===================== VERTICALS GRID ===================== */
-.verticals-section { background: var(--off-white); }
-.verticals-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
-}
-.product-card {
-    background: var(--white);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: box-shadow var(--transition), transform var(--transition);
-    display: flex;
-    flex-direction: column;
-}
-.product-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-6px); }
-.product-card-img {
-    height: 200px;
-    background: var(--off-white);
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
-}
-.product-card-img img { width: 100%; height: 100%; object-fit: cover; }
-
-.product-card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
-.product-card-body h3 { font-family: var(--font-head); font-size: 1.25rem; font-weight: 700; color: var(--blue); line-height: 1.25; }
-.product-card-body p { font-size: 0.9rem; color: var(--text-mid); line-height: 1.6; }
-.product-card-explore {
-    margin-top: auto;
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 0.88rem; font-weight: 700; color: var(--blue-light);
-    transition: gap var(--transition);
-}
-.product-card:hover .product-card-explore { gap: 10px; }
-
-/* ===================== FOOTER ===================== */
-footer { background: var(--blue); color: var(--white); padding: 0; }
-.footer-top {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 60px 20px 40px;
-    display: grid;
-    grid-template-columns: 1.8fr 1fr 1.4fr;
-    gap: 40px;
-}
-.footer-brand-logo { height: 48px; margin-bottom: 16px; filter: brightness(0) invert(1); }
-.footer-brand-desc { font-size: 0.9rem; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 20px; }
-.footer-socials { display: flex; gap: 10px; }
-.footer-socials a {
-    width: 36px; height: 36px; border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.3);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--white); font-size: 0.8rem;
-    transition: background var(--transition), border-color var(--transition);
-}
-.footer-socials a:hover { background: var(--green); border-color: var(--green); color: var(--blue); }
-.footer-col h4 { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 18px; }
-.footer-col ul li { margin-bottom: 10px; }
-.footer-col ul li a { font-size: 0.88rem; color: rgba(255,255,255,0.75); transition: color var(--transition), padding-left var(--transition); }
-.footer-col ul li a:hover { color: var(--green); padding-left: 4px; }
-.footer-contact-row { display: flex; gap: 10px; margin-bottom: 12px; align-items: flex-start; }
-.footer-contact-icon { color: var(--green); font-size: 0.9rem; margin-top: 3px; flex-shrink: 0; }
-.footer-contact-text { font-size: 0.88rem; color: rgba(255,255,255,0.8); line-height: 1.5; }
-
-/* Popular Searches */
-.popular-searches {
-    margin: 0 auto;
-    padding: 30px 20px;
-    max-width: var(--max-width);
-    border-top: 1px solid rgba(255,255,255,0.12);
-}
-.popular-searches h5 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
-.ps-accordion-item { border-top: 1px solid rgba(255,255,255,0.08); }
-.ps-accordion-btn {
-    width: 100%;
-    background: none;
-    border: none;
-    text-align: left;
-    color: rgba(255,255,255,0.65);
-    font-size: 0.85rem;
-    font-weight: 600;
-    font-family: var(--font-body);
-    padding: 10px 0;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: color var(--transition);
-}
-.ps-accordion-btn:hover { color: var(--green); }
-.ps-accordion-btn::after { content: '›'; font-size: 1.1rem; flex-shrink: 0; }
-.ps-accordion-content { display: none; padding: 0 0 12px 0; }
-.ps-accordion-content.open { display: block; }
-.ps-accordion-content p { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.65; }
-
-/* Footer bottom */
-.footer-bottom {
-    padding: 18px 20px;
-    margin: 0;
-    border-top: 1px solid rgba(255,255,255,0.12);
-    text-align: center;
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.45);
-    display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;
-}
-.footer-bottom a { color: rgba(255,255,255,0.55); transition: color var(--transition); }
-.footer-bottom a:hover { color: var(--green); }
-
-/* ===================== RESPONSIVE ===================== */
-@media (max-width: 900px) {
-    .menu-toggle { display: block; }
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 70px; left: 0;
-        width: 100%;
-        background: var(--white);
-        padding: 10px 0;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        z-index: 500;
-        text-align: center;
-    }
-    .nav-links.active { display: flex; }
-    .nav-links > a, .nav-links > .dropdown > a { 
-        padding: 15px 20px; 
-        border-bottom: 1px solid var(--border); 
-        border-radius: 0;
-        width: 100%;
-        display: block;
-    }
-    .dropdown-content { position: static; display: none; box-shadow: none; border: none; background: var(--off-white); }
-    .dropdown.active .dropdown-content { display: block; }
-    .footer-top { grid-template-columns: 1fr; gap: 30px; }
-}
-
-.sidebar-links li a { 
-    display: block; 
-    padding: 14px 20px; 
-    font-size: 0.95rem; 
-    border-bottom: 1px solid var(--border); 
-    color: var(--text-mid); 
-    font-weight: 500; 
-    text-decoration: none !important;
-    transition: all var(--transition);
-}
-.sidebar-links li a:hover { 
-    background: var(--off-white); 
-    color: var(--blue); 
-    padding-left: 26px; 
-    border-left: 4px solid var(--blue-light); 
-}
-.sidebar-links li a.active { 
-    background: var(--off-white); 
-    border-left: 4px solid var(--green); 
-    color: var(--blue); 
-    font-weight: 700; 
-}
-.detail-card ul { list-style: none; padding: 0; margin-top: 15px; }
-.detail-card ul li { 
-    position: relative; 
-    padding-left: 28px; 
-    margin-bottom: 12px; 
-    font-size: 0.95rem; 
-    line-height: 1.6; 
-    color: var(--text-mid);
-}
-.detail-card ul li::before { 
-    content: '✔'; 
-    position: absolute; 
-    left: 0; 
-    color: var(--green); 
-    font-weight: 800; 
-    font-size: 1.1rem;
-}
-.spec-table-wrap { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin: 20px 0; }
-.spec-table { width: 100%; border-collapse: collapse; }
-.spec-table th { background: var(--blue); color: white; padding: 14px 20px; text-align: left; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.9rem; }
-.spec-table td { padding: 12px 20px; border-bottom: 1px solid var(--border); color: var(--text-mid); font-size: 0.92rem; }
-.spec-table tr:last-child td { border-bottom: none; }
-.spec-table tr:nth-child(even) { background: #f9fafb; }
-.spec-table tr:hover { background: #f1f5f9; }</style>
+    <style>
+        /* Sidebar and product-specific styles remain inline as they are page-unique */
+        .sidebar-links li a { 
+            display: block; 
+            padding: 14px 20px; 
+            font-size: 0.95rem; 
+            border-bottom: 1px solid var(--border); 
+            color: var(--text-mid); 
+            font-weight: 500; 
+            text-decoration: none !important;
+            transition: all var(--transition);
+        }
+        .sidebar-links li a:hover { 
+            background: var(--off-white); 
+            color: var(--blue); 
+            padding-left: 26px; 
+            border-left: 4px solid var(--blue-light); 
+        }
+        .sidebar-links li a.active { 
+            background: var(--off-white); 
+            border-left: 4px solid var(--green); 
+            color: var(--blue); 
+            font-weight: 700; 
+        }
+    </style>
 </head>
 <body>
+    <!-- PRE-HEADER BAR -->
+    <div class="pre-header">
+        <div class="pre-header-inner">
+            <span class="pre-header-text">Welcome to IKON Business Products & Solutions</span>
+            <div class="pre-header-socials">
+                <a href="https://www.facebook.com/ikonbps" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/ikon_bps/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/ikon-business-products-and-solutions/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.youtube.com/@IKON_BPS" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="navbar">
             <div class="nav-brand">
                 <img src="img/IKON-Logo-2.png" alt="IKON Logo">
                 <div class="nav-brand-text">IKON Business Products <span>& Solutions</span></div>
             </div>
-            <div class="nav-links">
+            <button class="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+            <div class="nav-links" id="navLinks">
                 <a href="index.html">Home</a>
                 <div class="dropdown">
                     <a href="product-center.html" class="active">Product Center <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-content">
                         <a href="cnc-oscillating-knife.html">CNC Oscillating Knife</a>
+                        <a href="cnc-router.html">CNC Router</a>
                         <a href="cnc-multi-layer.html">CNC Multi-Layer</a>
                         <a href="co2-laser.html">CO2 Laser</a>
                         <a href="fiber-laser.html">Fiber Laser</a>
@@ -385,227 +112,168 @@ footer { background: var(--blue); color: var(--white); padding: 0; }
             <p>Versatile non-metallic cutting and engraving solutions for signage, gaskets, and industrial applications.</p>
         </div>
     </div>
-<!-- PRE-HEADER BAR -->
-<div class="pre-header">
-    <div class="pre-header-inner">
-        <span class="pre-header-text">Welcome to IKON Business Products &amp; Solutions</span>
-        <div class="pre-header-socials">
-            <a href="https://www.facebook.com/ikonbps" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/ikon_bps/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/company/ikon-business-products-and-solutions/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.youtube.com/@IKON_BPS" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+
+    <!-- VERTICALS CONTENT -->
+    <section class="section verticals-section">
+        <div class="section-inner">
+            <div class="section-label">INDUSTRY VERTICALS</div>
+            <h2 class="section-title">Applications</h2>
+            <div class="divider"></div>
+
+            <div class="verticals-grid">
+                <a href="detail-co2-laser.html?app=advertising" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CO2 Laser Cutting Machine..png" alt="Advertising"></div>
+                    <div class="product-card-body">
+                        <h3>Advertising</h3>
+                        <p>Laser precision for intricate acrylic letters, illuminated signs, and wooden decorative displays.</p>
+                        <span class="product-card-explore">View Details →</span>
+                    </div>
+                </a>
+                <a href="detail-co2-laser.html?app=gasket" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CO2 Laser Cutting Machine..png" alt="Gasket"></div>
+                    <div class="product-card-body">
+                        <h3>Gasket</h3>
+                        <p>Clean, sealed edges for industrial gaskets made from rubber, silicone, and non-metallic sheets.</p>
+                        <span class="product-card-explore">View Details →</span>
+                    </div>
+                </a>
+                <a href="detail-co2-laser.html?app=print" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CO2 Laser Cutting Machine..png" alt="Print"></div>
+                    <div class="product-card-body">
+                        <h3>Print</h3>
+                        <p>Precision finishing for custom-shaped folders, invitations, and retail packaging.</p>
+                        <span class="product-card-explore">View Details →</span>
+                    </div>
+                </a>
+                <a href="detail-co2-laser.html?app=flooring" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CO2 Laser Cutting Machine..png" alt="Flooring"></div>
+                    <div class="product-card-body">
+                        <h3>Flooring</h3>
+                        <p>Intricate engraving and cutting for decorative wooden flooring and floor mats.</p>
+                        <span class="product-card-explore">View Details →</span>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
-</div>
+    </section>
 
-<!-- HEADER -->
-<header>
-    <nav class="navbar">
-        <a href="index.html" class="nav-brand">
-            <img src="img/IKON-Logo-2.png" alt="IKON Logo">
-            <span class="nav-brand-text">IKON <span>Business Products &amp; Solutions</span></span>
-        </a>
-        <button class="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
-        <div class="nav-links" id="navLinks">
-            <a href="index.html" class="active">Home</a>
-
-            <div class="dropdown">
-                <a href="#product-center-page">Product Center ▾</a>
-                <div class="dropdown-content">
-                    <a href="cnc-oscillating-knife.html">CNC Oscillating Knife Cutting Machine</a>
-                    <a href="cnc-router.html">CNC Router</a>
-                    <a href="cnc-multi-layer.html">CNC Multi-Layer Cutting Machine</a>
-                    <a href="co2-laser.html">CO2 Laser Cutting Machine</a>
-                    <a href="fiber-laser.html">Fiber Laser Cutting Machine</a>
-                    <a href="spare-parts.html">Spare Parts</a>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <!-- Brand -->
+            <div>
+                <img src="img/IKON-Logo-2.png" alt="IKON Logo" class="footer-brand-logo">
+                <p class="footer-brand-desc">IKON Business Products & Solutions is dedicated to providing cutting-edge solutions for various industries, ensuring efficiency and excellence in every product. Our team of passionate experts is committed to pushing the boundaries of technology.</p>
+                <div class="footer-socials">
+                    <a href="https://www.facebook.com/ikonbps" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/ikon_bps/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/ikon-business-products-and-solutions/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.youtube.com/@IKON_BPS" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
-            <div class="dropdown">
-                <a href="applications.html">Applications ▾</a>
-                <div class="dropdown-content">
-                    <a href="applications.html?industry=advertising">Advertising</a>
-                    <a href="applications.html?industry=packaging">Packaging</a>
-                    <a href="applications.html?industry=garment">Garment</a>
-                    <a href="applications.html?industry=leather">Leather</a>
-                    <a href="applications.html?industry=automotive-interiors">Automotive Interiors</a>
-                    <a href="applications.html?industry=furniture">Furniture</a>
-                    <a href="applications.html?industry=gasket-sealing">Gasket &amp; Sealing</a>
-                    <a href="applications.html?industry=sound-insulation">Sound Insulation</a>
-                    <a href="applications.html?industry=interior-decor">Interior Decor</a>
-                    <a href="applications.html?industry=stone">Stone</a>
-                    <a href="applications.html?industry=upholstery">Upholstery</a>
-                    <a href="applications.html?industry=woodwork">Woodwork</a>
-                    <a href="applications.html" style="color:var(--blue-light);font-weight:700;border-top:1px solid var(--border);">View All Industries</a>
+            <!-- Quick Links -->
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="product-center.html">Product Center</a></li>
+                    <li><a href="applications.html">Applications</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="blog-index.html">Blog</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="contact-form.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <!-- Contact -->
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <div class="footer-contact-row">
+                    <i class="fas fa-map-marker-alt footer-contact-icon"></i>
+                    <span class="footer-contact-text">B-141, B-Wing, 1st Floor, Kiran Industrial Estate, MG Road, Goregaon West, Mumbai – 400104</span>
+                </div>
+                <div class="footer-contact-row">
+                    <i class="fas fa-phone-alt footer-contact-icon"></i>
+                    <span class="footer-contact-text"><a href="tel:+917506998077" style="color:inherit;">+91 7506998077</a></span>
+                </div>
+                <div class="footer-contact-row">
+                    <i class="fas fa-envelope footer-contact-icon"></i>
+                    <span class="footer-contact-text">
+                        <a href="mailto:shobha@ikonbps.in" style="color:inherit;">shobha@ikonbps.in</a><br>
+                        <a href="mailto:muralidharan@ikonbps.in" style="color:inherit;">muralidharan@ikonbps.in</a>
+                    </span>
+                </div>
+                <div class="footer-contact-row">
+                    <i class="fab fa-whatsapp footer-contact-icon"></i>
+                    <span class="footer-contact-text"><a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" style="color:inherit;">Chat on WhatsApp</a></span>
                 </div>
             </div>
-            <a href="#about-us-page">About Us</a>
-            <a href="blog-index.html">Blog</a>
-            <a href="#testimonials-page">Testimonials</a>
-            <a href="#contact-us-page" class="nav-cta">Contact Us</a>
         </div>
-    </nav>
-</header>
 
-
-</div>
-
-<!-- HEADER -->
-
-
-<!-- PAGE HERO -->
-<section class="page-hero">
-    <div class="page-hero-inner">
-        <div class="breadcrumb"><a href="index.html">Home</a> / <a href="product-center.html">Product Center</a> / CO2 Laser Cutting Machine</div>
-        <h1>CO2 Laser Cutting Machine</h1>
-        <p>Versatile CO2 laser for non-metallic cutting and engraving across signage, gaskets, print, and flooring.</p>
-    </div>
-</section>
-
-<!-- VERTICALS CONTENT -->
-<section class="section verticals-section">
-    <div class="section-inner">
-        <div class="section-label">INDUSTRY VERTICALS</div>
-        <h2 class="section-title">Applications</h2>
-        <div class="divider"></div>
-
-        <div class="verticals-grid">
-            <a href="detail-co2-laser.html?app=advertising" class="product-card">
-                <div class="product-card-img"><img src="img/products/CO2 Laser Cutting Machine..png" alt="Advertising"></div>
-                <div class="product-card-body">
-                    <h3>Advertising</h3>
-                    <p>Laser precision for intricate acrylic letters, illuminated signs, and wooden decorative displays.</p>
-                    <span class="product-card-explore">View Details →</span>
+        <!-- Popular Searches -->
+        <div class="popular-searches">
+            <h5>Popular Searches</h5>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">CNC Oscillating Knife Cutting Machine</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied high-precision CNC Oscillating Knife Cutting Machines to manufacturers in Mumbai, Pune, Delhi, Bangalore, Chennai, Hyderabad, Ahmedabad, Kolkata, Surat, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad, Nagpur, Kanpur, Lucknow, Visakhapatnam, Patna, Ghaziabad, Agra, Faridabad, Meerut, Varanasi, Gurgaon, Noida and many more cities across India.</p>
                 </div>
-            </a>
-            <a href="detail-co2-laser.html?app=gasket" class="product-card">
-                <div class="product-card-img"><img src="img/products/CO2 Laser Cutting Machine..png" alt="Gasket"></div>
-                <div class="product-card-body">
-                    <h3>Gasket</h3>
-                    <p>Clean, sealed edges for industrial gaskets made from rubber, silicone, and non-metallic sheets.</p>
-                    <span class="product-card-explore">View Details →</span>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">CNC Router Machine</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied robust CNC Router Machines for wood carving and fabrication to clients in Mumbai, Delhi, Bangalore, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune, Jaipur, Surat, Lucknow, Kanpur, Nagpur, Visakhapatnam, Indore, Bhopal, Vadodara, Ghaziabad, Ludhiana, Agra, Nashik, Faridabad, Meerut, Rajkot and across the country.</p>
                 </div>
-            </a>
-            <a href="detail-co2-laser.html?app=print" class="product-card">
-                <div class="product-card-img"><img src="img/products/CO2 Laser Cutting Machine..png" alt="Print"></div>
-                <div class="product-card-body">
-                    <h3>Print</h3>
-                    <p>Precision finishing for custom-shaped folders, invitations, and retail packaging.</p>
-                    <span class="product-card-explore">View Details →</span>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">Digital Flatbed Cutter (Packaging & Gaskets)</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied advanced Digital Flatbed Cutters for corrugated boxes and gasket manufacturing to businesses in Mumbai, Pune, Delhi, Bangalore, Chennai, Hyderabad, Ahmedabad, Kolkata, Surat, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad, Nagpur and more.</p>
                 </div>
-            </a>
-            <a href="detail-co2-laser.html?app=flooring" class="product-card">
-                <div class="product-card-img"><img src="img/products/CO2 Laser Cutting Machine..png" alt="Flooring"></div>
-                <div class="product-card-body">
-                    <h3>Flooring</h3>
-                    <p>Intricate engraving and cutting for decorative wooden flooring and floor mats.</p>
-                    <span class="product-card-explore">View Details →</span>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">Textile & Garment Cutting Machine</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied state-of-the-art Automatic Fabric Cutters and Digital Fabric Cutting Plotters to textile hubs in Mumbai, Delhi, Bangalore, Surat, Pune, Jaipur, Ludhiana, Tirupur, Coimbatore, Erode, Salem, Bhilwara, Panipat, Varanasi, Kanpur, Agra, Ambur, Ranipet and Jalandhar.</p>
                 </div>
-            </a>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">Laser Cutting Solutions</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied versatile CO2 and Fiber Laser Metal Cutting Machines for precision engineering to industries in Mumbai, Delhi, Bangalore, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad and Nagpur.</p>
+                </div>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">Specialized Applications</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied specialized cutting solutions for Sound Insulation, Automotive Interiors, Carpets, and Composite Materials to key markets in Mumbai, Pune, Delhi, Chennai, Manesar, Sanand, Bhadohi, Mirzapur, Jaipur, Panipat, Srinagar, Bangalore and Hyderabad.</p>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
 
-<!-- FOOTER -->
-<footer>
-    <div class="footer-top">
-        <!-- Brand -->
-        <div>
-            <img src="img/IKON-Logo-2.png" alt="IKON Logo" class="footer-brand-logo">
-            <p class="footer-brand-desc">IKON Business Products &amp; Solutions is dedicated to providing cutting-edge solutions for various industries, ensuring efficiency and excellence in every product. Our team of passionate experts is committed to pushing the boundaries of technology.</p>
-            <div class="footer-socials">
-                <a href="https://www.facebook.com/ikonbps" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/ikon_bps/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/company/ikon-business-products-and-solutions/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.youtube.com/@IKON_BPS" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-            </div>
+        <div class="footer-bottom">
+            <span>&copy; 2025 IKON Business Products & Solutions. All Rights Reserved.</span>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
         </div>
-        <!-- Quick Links -->
-        <div class="footer-col">
-            <h4>Quick Links</h4>
-            <ul>
-                <li><a href="#main-content">Home</a></li>
-                <li><a href="#product-center-page">Product Center</a></li>
-                <li><a href="#application-industries-page">Applications</a></li>
-                <li><a href="#about-us-page">About Us</a></li>
-                <li><a href="blog-index.html">Blog</a></li>
-                <li><a href="#testimonials-page">Testimonials</a></li>
-                <li><a href="#contact-us-page">Contact Us</a></li>
-            </ul>
-        </div>
-        <!-- Contact -->
-        <div class="footer-col">
-            <h4>Contact Us</h4>
-            <div class="footer-contact-row">
-                <i class="fas fa-map-marker-alt footer-contact-icon"></i>
-                <span class="footer-contact-text">B-141, B-Wing, 1st Floor, Kiran Industrial Estate, MG Road, Goregaon West, Mumbai – 400104</span>
-            </div>
-            <div class="footer-contact-row">
-                <i class="fas fa-phone-alt footer-contact-icon"></i>
-                <span class="footer-contact-text"><a href="tel:+917506998077" style="color:inherit;">+91 7506998077</a></span>
-            </div>
-            <div class="footer-contact-row">
-                <i class="fas fa-envelope footer-contact-icon"></i>
-                <span class="footer-contact-text">
-                    <a href="mailto:shobha@ikonbps.in" style="color:inherit;">shobha@ikonbps.in</a><br>
-                    <a href="mailto:muralidharan@ikonbps.in" style="color:inherit;">muralidharan@ikonbps.in</a>
-                </span>
-            </div>
-            <div class="footer-contact-row">
-                <i class="fab fa-whatsapp footer-contact-icon"></i>
-                <span class="footer-contact-text"><a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" style="color:inherit;">Chat on WhatsApp</a></span>
-            </div>
-        </div>
-    </div>
+    </footer>
 
-    <!-- Popular Searches -->
-    <div class="popular-searches">
-        <h5>Popular Searches</h5>
-        <div class="ps-accordion-item">
-            <button class="ps-accordion-btn">CNC Oscillating Knife Cutting Machine</button>
-            <div class="ps-accordion-content">
-                <p>IKON BPS has supplied high-precision CNC Oscillating Knife Cutting Machines to manufacturers in Mumbai, Pune, Delhi, Bangalore, Chennai, Hyderabad, Ahmedabad, Kolkata, Surat, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad, Nagpur, Kanpur, Lucknow, Visakhapatnam, Patna, Ghaziabad, Agra, Faridabad, Meerut, Varanasi, Gurgaon, Noida and many more cities across India.</p>
-            </div>
-        </div>
-        <div class="ps-accordion-item">
-            <button class="ps-accordion-btn">CNC Router Machine</button>
-            <div class="ps-accordion-content">
-                <p>IKON BPS has supplied robust CNC Router Machines for wood carving and fabrication to clients in Mumbai, Delhi, Bangalore, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune, Jaipur, Surat, Lucknow, Kanpur, Nagpur, Visakhapatnam, Indore, Bhopal, Vadodara, Ghaziabad, Ludhiana, Agra, Nashik, Faridabad, Meerut, Rajkot and across the country.</p>
-            </div>
-        </div>
-        <div class="ps-accordion-item">
-            <button class="ps-accordion-btn">Digital Flatbed Cutter (Packaging &amp; Gaskets)</button>
-            <div class="ps-accordion-content">
-                <p>IKON BPS has supplied advanced Digital Flatbed Cutters for corrugated boxes and gasket manufacturing to businesses in Mumbai, Pune, Delhi, Bangalore, Chennai, Hyderabad, Ahmedabad, Kolkata, Surat, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad, Nagpur and more.</p>
-            </div>
-        </div>
-        <div class="ps-accordion-item">
-            <button class="ps-accordion-btn">Textile &amp; Garment Cutting Machine</button>
-            <div class="ps-accordion-content">
-                <p>IKON BPS has supplied state-of-the-art Automatic Fabric Cutters and Digital Fabric Cutting Plotters to textile hubs in Mumbai, Delhi, Bangalore, Surat, Pune, Jaipur, Ludhiana, Tirupur, Coimbatore, Erode, Salem, Bhilwara, Panipat, Varanasi, Kanpur, Agra, Ambur, Ranipet and Jalandhar.</p>
-            </div>
-        </div>
-        <div class="ps-accordion-item">
-            <button class="ps-accordion-btn">Laser Cutting Solutions</button>
-            <div class="ps-accordion-content">
-                <p>IKON BPS has supplied versatile CO2 and Fiber Laser Metal Cutting Machines for precision engineering to industries in Mumbai, Delhi, Bangalore, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad and Nagpur.</p>
-            </div>
-        </div>
-        <div class="ps-accordion-item">
-            <button class="ps-accordion-btn">Specialized Applications</button>
-            <div class="ps-accordion-content">
-                <p>IKON BPS has supplied specialized cutting solutions for Sound Insulation, Automotive Interiors, Carpets, and Composite Materials to key markets in Mumbai, Pune, Delhi, Chennai, Manesar, Sanand, Bhadohi, Mirzapur, Jaipur, Panipat, Srinagar, Bangalore and Hyderabad.</p>
-            </div>
-        </div>
-    </div>
+    <script src="js/scripts.js"></script>
+    <script>
+        // Popular Searches accordion
+        document.querySelectorAll('.ps-accordion-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const isOpen = content.classList.contains('open');
+                document.querySelectorAll('.ps-accordion-content').forEach(c => c.classList.remove('open'));
+                if (!isOpen) content.classList.add('open');
+            });
+        });
 
-    <div class="footer-bottom">
-        <span>&copy; 2025 IKON Business Products &amp; Solutions. All Rights Reserved.</span>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
-    </div>
-</footer>
+        // Mobile menu
+        document.querySelector('.menu-toggle')?.addEventListener('click', () => {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
-

@@ -15,7 +15,7 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-1TBGXB2829');
+        gtag('config', 'G-1TBGXB2829', { 'debug_mode': true });
         
         // Track page views with additional parameters
         gtag('event', 'page_view', {
@@ -33,20 +33,63 @@
     <!-- Privacy Controls -->
     <script src="js/privacy-controls.js"></script>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Sidebar and product-specific styles remain inline as they are page-unique */
+        .sidebar-links li a { 
+            display: block; 
+            padding: 14px 20px; 
+            font-size: 0.95rem; 
+            border-bottom: 1px solid var(--border); 
+            color: var(--text-mid); 
+            font-weight: 500; 
+            text-decoration: none !important;
+            transition: all var(--transition);
+        }
+        .sidebar-links li a:hover { 
+            background: var(--off-white); 
+            color: var(--blue); 
+            padding-left: 26px; 
+            border-left: 4px solid var(--blue-light); 
+        }
+        .sidebar-links li a.active { 
+            background: var(--off-white); 
+            border-left: 4px solid var(--green); 
+            color: var(--blue); 
+            font-weight: 700; 
+        }
+        .fade-in-section { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+        .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
+    </style>
 </head>
 <body>
+    <!-- PRE-HEADER BAR -->
+    <div class="pre-header">
+        <div class="pre-header-inner">
+            <span class="pre-header-text">Welcome to IKON Business Products & Solutions</span>
+            <div class="pre-header-socials">
+                <a href="https://www.facebook.com/ikonbps" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/ikon_bps/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/ikon-business-products-and-solutions/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.youtube.com/@IKON_BPS" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="navbar">
             <div class="nav-brand">
                 <img src="img/IKON-Logo-2.png" alt="IKON Logo">
                 <div class="nav-brand-text">IKON Business Products <span>& Solutions</span></div>
             </div>
-            <div class="nav-links">
+            <button class="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+            <div class="nav-links" id="navLinks">
                 <a href="index.html">Home</a>
                 <div class="dropdown">
                     <a href="product-center.html" class="active">Product Center <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-content">
                         <a href="cnc-oscillating-knife.html">CNC Oscillating Knife</a>
+                        <a href="cnc-router.html">CNC Router</a>
                         <a href="cnc-multi-layer.html">CNC Multi-Layer</a>
                         <a href="co2-laser.html">CO2 Laser</a>
                         <a href="fiber-laser.html">Fiber Laser</a>
@@ -69,266 +112,159 @@
             <p>High-capacity precision cutting for mass production in garments, automotive, and industrial textiles.</p>
         </div>
     </div>
-<style>
-/* Sidebar and product-specific styles remain inline as they are page-unique */
-.sidebar-links li a { 
-    display: block; 
-    padding: 14px 20px; 
-    font-size: 0.95rem; 
-    border-bottom: 1px solid var(--border); 
-    color: var(--text-mid); 
-    font-weight: 500; 
-    text-decoration: none !important;
-    transition: all var(--transition);
-}
-.sidebar-links li a:hover { 
-    background: var(--off-white); 
-    color: var(--blue); 
-    padding-left: 26px; 
-    border-left: 4px solid var(--blue-light); 
-}
-.sidebar-links li a.active { 
-    background: var(--off-white); 
-    border-left: 4px solid var(--green); 
-    color: var(--blue); 
-    font-weight: 700; 
-}
-.fade-in-section { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
-.fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
-</style>
-</head>
-<body>
 
-<!-- PRE-HEADER BAR -->
-<div class="pre-header">
-    <div class="pre-header-inner">
-        <span class="pre-header-text">Welcome to IKON Business Products &amp; Solutions</span>
-        <div class="pre-header-socials">
-            <a href="https://www.facebook.com/ikonbps" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/ikon_bps/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/company/ikon-business-products-and-solutions/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.youtube.com/@IKON_BPS" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    <section class="section">
+        <div class="section-inner">
+            <h2 class="section-title">Applications</h2>
+            <div class="verticals-grid">
+                <a href="detail-cnc-multi-layer.html?app=packaging" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Packaging"></div><div class="product-card-body"><h3>Packaging</h3><p>High-volume processing for corrugated stacks.</p><span class="product-card-explore">View Details →</span></div></a>
+                <a href="detail-cnc-multi-layer.html?app=graphics" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Graphics"></div><div class="product-card-body"><h3>Graphics</h3><p>Mass production of signage and promotional displays.</p><span class="product-card-explore">View Details →</span></div></a>
+                <a href="detail-cnc-multi-layer.html?app=leather" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Leather"></div><div class="product-card-body"><h3>Leather</h3><p>Efficient multi-layer cutting for shoes and bags.</p><span class="product-card-explore">View Details →</span></div></a>
+                <a href="detail-cnc-multi-layer.html?app=garment" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Garment"></div><div class="product-card-body"><h3>Garment</h3><p>High-ply fabric cutting for mass-market fashion.</p><span class="product-card-explore">View Details →</span></div></a>
+                <a href="detail-cnc-multi-layer.html?app=automotive-interior" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Automotive Interior"></div><div class="product-card-body"><h3>Automotive Interior</h3><p>Precision components for Tier-1 suppliers.</p><span class="product-card-explore">View Details →</span></div></a>
+                <a href="detail-cnc-multi-layer.html?app=carpet" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Carpet"></div><div class="product-card-body"><h3>Carpet</h3><p>Heavy-duty mass production of industrial flooring.</p><span class="product-card-explore">View Details →</span></div></a>
+                <a href="detail-cnc-multi-layer.html?app=sound-insulation" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Sound Insulation"></div><div class="product-card-body"><h3>Sound Insulation</h3><p>Acoustic panel and porous material processing.</p><span class="product-card-explore">View Details →</span></div></a>
+                <a href="detail-cnc-multi-layer.html?app=interior-decor" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Interior Decor"></div><div class="product-card-body"><h3>Interior Decor</h3><p>Large-format wall panels and decorative linings.</p><span class="product-card-explore">View Details →</span></div></a>
+                <a href="detail-cnc-multi-layer.html?app=upholstery" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Upholstery"></div><div class="product-card-body"><h3>Upholstery</h3><p>Efficient cutting for furniture and contract textiles.</p><span class="product-card-explore">View Details →</span></div></a>
+                <a href="detail-cnc-multi-layer.html?app=fabric" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Fabric"></div><div class="product-card-body"><h3>Fabric</h3><p>Woven, non-woven, and technical textile solutions.</p><span class="product-card-explore">View Details →</span></div></a>
+                <a href="detail-cnc-multi-layer.html?app=acoustic-panel" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Acoustic Panel"></div><div class="product-card-body"><h3>Acoustic Panel</h3><p>Interlocking designs for architectural acoustics.</p><span class="product-card-explore">View Details →</span></div></a>
+                <a href="detail-cnc-multi-layer.html?app=foam" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Foam"></div><div class="product-card-body"><h3>Foam</h3><p>Industrial-scale production for cushions and inserts.</p><span class="product-card-explore">View Details →</span></div></a>
+                <a href="detail-cnc-multi-layer.html?app=footwear" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Footwear"></div><div class="product-card-body"><h3>Footwear</h3><p>Mass production of insoles and components.</p><span class="product-card-explore">View Details →</span></div></a>
+                <a href="detail-cnc-multi-layer.html?app=bags" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Bags"></div><div class="product-card-body"><h3>Bags</h3><p>High-velocity cutting for heavy technical fabrics.</p><span class="product-card-explore">View Details →</span></div></a>
+                <a href="detail-cnc-multi-layer.html?app=flooring" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Flooring"></div><div class="product-card-body"><h3>Flooring</h3><p>Industrial-grade production for vinyl and rubber.</p><span class="product-card-explore">View Details →</span></div></a>
+                <a href="detail-cnc-multi-layer.html?app=print" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Print"></div><div class="product-card-body"><h3>Print</h3><p>Automated print-to-cut finishing at industrial scale.</p><span class="product-card-explore">View Details →</span></div></a>
+            </div>
         </div>
-    </div>
-</div>
+    </section>
 
-<!-- HEADER -->
-<header>
-    <nav class="navbar">
-        <a href="index.html" class="nav-brand">
-            <img src="img/IKON-Logo-2.png" alt="IKON Logo">
-            <span class="nav-brand-text">IKON <span>Business Products &amp; Solutions</span></span>
-        </a>
-        <button class="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
-        <div class="nav-links" id="navLinks">
-            <a href="index.html" class="active">Home</a>
-
-            <div class="dropdown">
-                <a href="#product-center-page">Product Center ▾</a>
-                <div class="dropdown-content">
-                    <a href="cnc-oscillating-knife.html">CNC Oscillating Knife Cutting Machine</a>
-                    <a href="cnc-router.html">CNC Router</a>
-                    <a href="cnc-multi-layer.html">CNC Multi-Layer Cutting Machine</a>
-                    <a href="co2-laser.html">CO2 Laser Cutting Machine</a>
-                    <a href="fiber-laser.html">Fiber Laser Cutting Machine</a>
-                    <a href="spare-parts.html">Spare Parts</a>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <!-- Brand -->
+            <div>
+                <img src="img/IKON-Logo-2.png" alt="IKON Logo" class="footer-brand-logo">
+                <p class="footer-brand-desc">IKON Business Products & Solutions is dedicated to providing cutting-edge solutions for various industries, ensuring efficiency and excellence in every product. Our team of passionate experts is committed to pushing the boundaries of technology.</p>
+                <div class="footer-socials">
+                    <a href="https://www.facebook.com/ikonbps" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/ikon_bps/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/ikon-business-products-and-solutions/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.youtube.com/@IKON_BPS" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
-            <div class="dropdown">
-                <a href="applications.html">Applications ▾</a>
-                <div class="dropdown-content">
-                    <a href="applications.html?industry=advertising">Advertising</a>
-                    <a href="applications.html?industry=packaging">Packaging</a>
-                    <a href="applications.html?industry=garment">Garment</a>
-                    <a href="applications.html?industry=leather">Leather</a>
-                    <a href="applications.html?industry=automotive-interiors">Automotive Interiors</a>
-                    <a href="applications.html?industry=furniture">Furniture</a>
-                    <a href="applications.html?industry=gasket-sealing">Gasket &amp; Sealing</a>
-                    <a href="applications.html?industry=sound-insulation">Sound Insulation</a>
-                    <a href="applications.html?industry=interior-decor">Interior Decor</a>
-                    <a href="applications.html?industry=stone">Stone</a>
-                    <a href="applications.html?industry=upholstery">Upholstery</a>
-                    <a href="applications.html?industry=woodwork">Woodwork</a>
-                    <a href="applications.html" style="color:var(--blue-light);font-weight:700;border-top:1px solid var(--border);">View All Industries</a>
+            <!-- Quick Links -->
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="product-center.html">Product Center</a></li>
+                    <li><a href="applications.html">Applications</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="blog-index.html">Blog</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="contact-form.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <!-- Contact -->
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <div class="footer-contact-row">
+                    <i class="fas fa-map-marker-alt footer-contact-icon"></i>
+                    <span class="footer-contact-text">B-141, B-Wing, 1st Floor, Kiran Industrial Estate, MG Road, Goregaon West, Mumbai – 400104</span>
+                </div>
+                <div class="footer-contact-row">
+                    <i class="fas fa-phone-alt footer-contact-icon"></i>
+                    <span class="footer-contact-text"><a href="tel:+917506998077" style="color:inherit;">+91 7506998077</a></span>
+                </div>
+                <div class="footer-contact-row">
+                    <i class="fas fa-envelope footer-contact-icon"></i>
+                    <span class="footer-contact-text">
+                        <a href="mailto:shobha@ikonbps.in" style="color:inherit;">shobha@ikonbps.in</a><br>
+                        <a href="mailto:muralidharan@ikonbps.in" style="color:inherit;">muralidharan@ikonbps.in</a>
+                    </span>
+                </div>
+                <div class="footer-contact-row">
+                    <i class="fab fa-whatsapp footer-contact-icon"></i>
+                    <span class="footer-contact-text"><a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" style="color:inherit;">Chat on WhatsApp</a></span>
                 </div>
             </div>
-            <a href="#about-us-page">About Us</a>
-            <a href="blog-index.html">Blog</a>
-            <a href="#testimonials-page">Testimonials</a>
-            <a href="#contact-us-page" class="nav-cta">Contact Us</a>
         </div>
-    </nav>
-</header>
 
-<section class="page-hero">
-    <div class="page-hero-inner">
-        <div class="breadcrumb"><a href="index.html">Home</a> / <a href="index.html#product-center-page">Product Center</a> / CNC Multi-Layer</div>
-        <h1>CNC Multi-Layer Cutting Machine</h1>
-        <p>High-throughput automated cutting for multi-ply production.</p>
-    </div>
-</section>
+        <!-- Popular Searches -->
+        <div class="popular-searches">
+            <h5>Popular Searches</h5>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">CNC Oscillating Knife Cutting Machine</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied high-precision CNC Oscillating Knife Cutting Machines to manufacturers in Mumbai, Pune, Delhi, Bangalore, Chennai, Hyderabad, Ahmedabad, Kolkata, Surat, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad, Nagpur, Kanpur, Lucknow, Visakhapatnam, Patna, Ghaziabad, Agra, Faridabad, Meerut, Varanasi, Gurgaon, Noida and many more cities across India.</p>
+                </div>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">CNC Router Machine</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied robust CNC Router Machines for wood carving and fabrication to clients in Mumbai, Delhi, Bangalore, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune, Jaipur, Surat, Lucknow, Kanpur, Nagpur, Visakhapatnam, Indore, Bhopal, Vadodara, Ghaziabad, Ludhiana, Agra, Nashik, Faridabad, Meerut, Rajkot and across the country.</p>
+                </div>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">Digital Flatbed Cutter (Packaging & Gaskets)</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied advanced Digital Flatbed Cutters for corrugated boxes and gasket manufacturing to businesses in Mumbai, Pune, Delhi, Bangalore, Chennai, Hyderabad, Ahmedabad, Kolkata, Surat, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad, Nagpur and more.</p>
+                </div>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">Textile & Garment Cutting Machine</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied state-of-the-art Automatic Fabric Cutters and Digital Fabric Cutting Plotters to textile hubs in Mumbai, Delhi, Bangalore, Surat, Pune, Jaipur, Ludhiana, Tirupur, Coimbatore, Erode, Salem, Bhilwara, Panipat, Varanasi, Kanpur, Agra, Ambur, Ranipet and Jalandhar.</p>
+                </div>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">Laser Cutting Solutions</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied versatile CO2 and Fiber Laser Metal Cutting Machines for precision engineering to industries in Mumbai, Delhi, Bangalore, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad and Nagpur.</p>
+                </div>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">Specialized Applications</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied specialized cutting solutions for Sound Insulation, Automotive Interiors, Carpets, and Composite Materials to key markets in Mumbai, Pune, Delhi, Chennai, Manesar, Sanand, Bhadohi, Mirzapur, Jaipur, Panipat, Srinagar, Bangalore and Hyderabad.</p>
+                </div>
+            </div>
+        </div>
 
-<section class="section">
-    <div class="section-inner">
-        <h2 class="section-title">Applications</h2>
-        <div class="verticals-grid">
-            <a href="detail-cnc-multi-layer.html?app=packaging" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Packaging"></div><div class="product-card-body"><h3>Packaging</h3><p>High-volume processing for corrugated stacks.</p><span class="product-card-explore">View Details →</span></div></a>
-            <a href="detail-cnc-multi-layer.html?app=graphics" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Graphics"></div><div class="product-card-body"><h3>Graphics</h3><p>Mass production of signage and promotional displays.</p><span class="product-card-explore">View Details →</span></div></a>
-            <a href="detail-cnc-multi-layer.html?app=leather" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Leather"></div><div class="product-card-body"><h3>Leather</h3><p>Efficient multi-layer cutting for shoes and bags.</p><span class="product-card-explore">View Details →</span></div></a>
-            <a href="detail-cnc-multi-layer.html?app=garment" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Garment"></div><div class="product-card-body"><h3>Garment</h3><p>High-ply fabric cutting for mass-market fashion.</p><span class="product-card-explore">View Details →</span></div></a>
-            <a href="detail-cnc-multi-layer.html?app=automotive-interior" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Automotive Interior"></div><div class="product-card-body"><h3>Automotive Interior</h3><p>Precision components for Tier-1 suppliers.</p><span class="product-card-explore">View Details →</span></div></a>
-            <a href="detail-cnc-multi-layer.html?app=carpet" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Carpet"></div><div class="product-card-body"><h3>Carpet</h3><p>Heavy-duty mass production of industrial flooring.</p><span class="product-card-explore">View Details →</span></div></a>
-            <a href="detail-cnc-multi-layer.html?app=sound-insulation" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Sound Insulation"></div><div class="product-card-body"><h3>Sound Insulation</h3><p>Acoustic panel and porous material processing.</p><span class="product-card-explore">View Details →</span></div></a>
-            <a href="detail-cnc-multi-layer.html?app=interior-decor" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Interior Decor"></div><div class="product-card-body"><h3>Interior Decor</h3><p>Large-format wall panels and decorative linings.</p><span class="product-card-explore">View Details →</span></div></a>
-            <a href="detail-cnc-multi-layer.html?app=upholstery" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Upholstery"></div><div class="product-card-body"><h3>Upholstery</h3><p>Efficient cutting for furniture and contract textiles.</p><span class="product-card-explore">View Details →</span></div></a>
-            <a href="detail-cnc-multi-layer.html?app=fabric" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Fabric"></div><div class="product-card-body"><h3>Fabric</h3><p>Woven, non-woven, and technical textile solutions.</p><span class="product-card-explore">View Details →</span></div></a>
-            <a href="detail-cnc-multi-layer.html?app=acoustic-panel" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Acoustic Panel"></div><div class="product-card-body"><h3>Acoustic Panel</h3><p>Interlocking designs for architectural acoustics.</p><span class="product-card-explore">View Details →</span></div></a>
-            <a href="detail-cnc-multi-layer.html?app=foam" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Foam"></div><div class="product-card-body"><h3>Foam</h3><p>Industrial-scale production for cushions and inserts.</p><span class="product-card-explore">View Details →</span></div></a>
-            <a href="detail-cnc-multi-layer.html?app=footwear" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Footwear"></div><div class="product-card-body"><h3>Footwear</h3><p>Mass production of insoles and components.</p><span class="product-card-explore">View Details →</span></div></a>
-            <a href="detail-cnc-multi-layer.html?app=bags" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Bags"></div><div class="product-card-body"><h3>Bags</h3><p>High-velocity cutting for heavy technical fabrics.</p><span class="product-card-explore">View Details →</span></div></a>
-            <a href="detail-cnc-multi-layer.html?app=flooring" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Flooring"></div><div class="product-card-body"><h3>Flooring</h3><p>Industrial-grade production for vinyl and rubber.</p><span class="product-card-explore">View Details →</span></div></a>
-            <a href="detail-cnc-multi-layer.html?app=print" class="product-card fade-in-section"><div class="product-card-img"><img src="img/products/CNC Multi-Layer Cutting Machine.png" alt="Print"></div><div class="product-card-body"><h3>Print</h3><p>Automated print-to-cut finishing at industrial scale.</p><span class="product-card-explore">View Details →</span></div></a>
+        <div class="footer-bottom">
+            <span>&copy; 2025 IKON Business Products & Solutions. All Rights Reserved.</span>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
         </div>
-    </div>
-</section>
+    </footer>
 
-<footer>
-    <div class="footer-top">
-        <!-- Brand -->
-        <div>
-            <img src="img/IKON-Logo-2.png" alt="IKON Logo" class="footer-brand-logo">
-            <p class="footer-brand-desc">IKON Business Products &amp; Solutions is dedicated to providing cutting-edge solutions for various industries, ensuring efficiency and excellence in every product. Our team of passionate experts is committed to pushing the boundaries of technology.</p>
-            <div class="footer-socials">
-                <a href="https://www.facebook.com/ikonbps" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/ikon_bps/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/company/ikon-business-products-and-solutions/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.youtube.com/@IKON_BPS" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-            </div>
-        </div>
-        <!-- Quick Links -->
-        <div class="footer-col">
-            <h4>Quick Links</h4>
-            <ul>
-                <li><a href="#main-content">Home</a></li>
-                <li><a href="#product-center-page">Product Center</a></li>
-                <li><a href="#application-industries-page">Applications</a></li>
-                <li><a href="#about-us-page">About Us</a></li>
-                <li><a href="blog-index.html">Blog</a></li>
-                <li><a href="#testimonials-page">Testimonials</a></li>
-                <li><a href="#contact-us-page">Contact Us</a></li>
-            </ul>
-        </div>
-        <!-- Contact -->
-        <div class="footer-col">
-            <h4>Contact Us</h4>
-            <div class="footer-contact-row">
-                <i class="fas fa-map-marker-alt footer-contact-icon"></i>
-                <span class="footer-contact-text">B-141, B-Wing, 1st Floor, Kiran Industrial Estate, MG Road, Goregaon West, Mumbai – 400104</span>
-            </div>
-            <div class="footer-contact-row">
-                <i class="fas fa-phone-alt footer-contact-icon"></i>
-                <span class="footer-contact-text"><a href="tel:+917506998077" style="color:inherit;">+91 7506998077</a></span>
-            </div>
-            <div class="footer-contact-row">
-                <i class="fas fa-envelope footer-contact-icon"></i>
-                <span class="footer-contact-text">
-                    <a href="mailto:shobha@ikonbps.in" style="color:inherit;">shobha@ikonbps.in</a><br>
-                    <a href="mailto:muralidharan@ikonbps.in" style="color:inherit;">muralidharan@ikonbps.in</a>
-                </span>
-            </div>
-            <div class="footer-contact-row">
-                <i class="fab fa-whatsapp footer-contact-icon"></i>
-                <span class="footer-contact-text"><a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" style="color:inherit;">Chat on WhatsApp</a></span>
-            </div>
-        </div>
-    </div>
+    <script src="js/scripts.js"></script>
+    <script>
+        // Fade-in animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('is-visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
 
-    <!-- Popular Searches -->
-    <div class="popular-searches">
-        <h5>Popular Searches</h5>
-        <div class="ps-accordion-item">
-            <button class="ps-accordion-btn">CNC Oscillating Knife Cutting Machine</button>
-            <div class="ps-accordion-content">
-                <p>IKON BPS has supplied high-precision CNC Oscillating Knife Cutting Machines to manufacturers in Mumbai, Pune, Delhi, Bangalore, Chennai, Hyderabad, Ahmedabad, Kolkata, Surat, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad, Nagpur, Kanpur, Lucknow, Visakhapatnam, Patna, Ghaziabad, Agra, Faridabad, Meerut, Varanasi, Gurgaon, Noida and many more cities across India.</p>
-            </div>
-        </div>
-        <div class="ps-accordion-item">
-            <button class="ps-accordion-btn">CNC Router Machine</button>
-            <div class="ps-accordion-content">
-                <p>IKON BPS has supplied robust CNC Router Machines for wood carving and fabrication to clients in Mumbai, Delhi, Bangalore, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune, Jaipur, Surat, Lucknow, Kanpur, Nagpur, Visakhapatnam, Indore, Bhopal, Vadodara, Ghaziabad, Ludhiana, Agra, Nashik, Faridabad, Meerut, Rajkot and across the country.</p>
-            </div>
-        </div>
-        <div class="ps-accordion-item">
-            <button class="ps-accordion-btn">Digital Flatbed Cutter (Packaging &amp; Gaskets)</button>
-            <div class="ps-accordion-content">
-                <p>IKON BPS has supplied advanced Digital Flatbed Cutters for corrugated boxes and gasket manufacturing to businesses in Mumbai, Pune, Delhi, Bangalore, Chennai, Hyderabad, Ahmedabad, Kolkata, Surat, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad, Nagpur and more.</p>
-            </div>
-        </div>
-        <div class="ps-accordion-item">
-            <button class="ps-accordion-btn">Textile &amp; Garment Cutting Machine</button>
-            <div class="ps-accordion-content">
-                <p>IKON BPS has supplied state-of-the-art Automatic Fabric Cutters and Digital Fabric Cutting Plotters to textile hubs in Mumbai, Delhi, Bangalore, Surat, Pune, Jaipur, Ludhiana, Tirupur, Coimbatore, Erode, Salem, Bhilwara, Panipat, Varanasi, Kanpur, Agra, Ambur, Ranipet and Jalandhar.</p>
-            </div>
-        </div>
-        <div class="ps-accordion-item">
-            <button class="ps-accordion-btn">Laser Cutting Solutions</button>
-            <div class="ps-accordion-content">
-                <p>IKON BPS has supplied versatile CO2 and Fiber Laser Metal Cutting Machines for precision engineering to industries in Mumbai, Delhi, Bangalore, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad and Nagpur.</p>
-            </div>
-        </div>
-        <div class="ps-accordion-item">
-            <button class="ps-accordion-btn">Specialized Applications</button>
-            <div class="ps-accordion-content">
-                <p>IKON BPS has supplied specialized cutting solutions for Sound Insulation, Automotive Interiors, Carpets, and Composite Materials to key markets in Mumbai, Pune, Delhi, Chennai, Manesar, Sanand, Bhadohi, Mirzapur, Jaipur, Panipat, Srinagar, Bangalore and Hyderabad.</p>
-            </div>
-        </div>
-    </div>
+        // Popular Searches accordion
+        document.querySelectorAll('.ps-accordion-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const isOpen = content.classList.contains('open');
+                document.querySelectorAll('.ps-accordion-content').forEach(c => c.classList.remove('open'));
+                if (!isOpen) content.classList.add('open');
+            });
+        });
 
-    <div class="footer-bottom">
-        <span>&copy; 2025 IKON Business Products &amp; Solutions. All Rights Reserved.</span>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
-    </div>
-</footer>
-
-<script>
-// Fade-in animation
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-        if (e.isIntersecting) {
-            e.target.classList.add('is-visible');
-            observer.unobserve(e.target);
-        }
-    });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
-
-// Mobile menu
-document.querySelector('.menu-toggle')?.addEventListener('click', () => {
-    document.getElementById('navLinks').classList.toggle('active');
-});
-
-// Mobile dropdowns
-document.querySelectorAll('.dropdown > a').forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
-        if (window.innerWidth <= 900) {
-            e.preventDefault();
-            anchor.parentElement.classList.toggle('active');
-        }
-    });
-});
-
-// Popular Searches accordion
-document.querySelectorAll('.ps-accordion-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const content = btn.nextElementSibling;
-        const isOpen = content.classList.contains('open');
-        document.querySelectorAll('.ps-accordion-content').forEach(c => c.classList.remove('open'));
-        if (!isOpen) content.classList.add('open');
-    });
-});
-</script>
+        // Mobile menu
+        document.querySelector('.menu-toggle')?.addEventListener('click', () => {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
