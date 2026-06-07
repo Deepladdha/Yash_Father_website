@@ -1,5 +1,5 @@
 import { CONFIG } from '../config.js';
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
 /**
  * Auth Service (Clerk)
@@ -50,26 +50,27 @@ export const AuthService = (function() {
 
     return {
         init: async (onAuthSuccess, onAuthRequired) => {
-            try {
-                const publishableKey = CONFIG.CLERK.PUBLISHABLE_KEY;
-                const clerkDomain = atob(publishableKey.split('_')[2]).slice(0, -1);
+            const container = document.getElementById('clerk-sign-in');
+            if (container) {
+                container.innerHTML = '<div class="loader"><i class="fas fa-spinner fa-spin"></i> Initializing Security...</div>';
+            }
 
+            try {
+                console.log('AuthService: Initializing Clerk...');
+                const publishableKey = CONFIG.CLERK.PUBLISHABLE_KEY;
+
+                // Load Clerk SDK
                 await loadScriptOnce(
                     'clerk-sdk',
                     'https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js',
                     { 'data-clerk-publishable-key': publishableKey }
                 );
 
-                await loadScriptOnce(
-                    'clerk-ui-sdk',
-                    `https://${clerkDomain}/npm/@clerk/ui@1/dist/ui.browser.js`
-                );
+                if (!window.Clerk) {
+                    throw new Error('Clerk SDK failed to load into window object');
+                }
 
                 await window.Clerk.load({
-                    standardBrowserCookie: true,
-                    ui: {
-                        ClerkUI: window.__internal_ClerkUICtor
-                    },
                     appearance: {
                         layout: {
                             helpPageUrl: 'https://ikonsolutions.vercel.app/contact-form.html',
@@ -87,15 +88,17 @@ export const AuthService = (function() {
                     }
                 });
 
+                console.log('AuthService: Clerk loaded successfully. User status:', !!window.Clerk.user);
+
                 if (window.Clerk.user) {
                     const isAdmin = await checkAdminAccess(window.Clerk.user);
+                    console.log('AuthService: Admin check result:', isAdmin);
                     
                     if (isAdmin) {
                         user = window.Clerk.user;
                         onAuthSuccess(user);
                     } else {
                         // Deny Access
-                        const container = document.getElementById('clerk-sign-in');
                         if (container) {
                             container.innerHTML = `
                                 <div style="color: #ef4444; padding: 20px; text-align: center;">
@@ -111,9 +114,10 @@ export const AuthService = (function() {
                     return;
                 }
 
-                const container = document.getElementById('clerk-sign-in');
+                // Not signed in - mount sign in
                 if (container) {
                     container.innerHTML = '';
+                    console.log('AuthService: Mounting Sign-In form...');
                     window.Clerk.mountSignIn(container, {
                         afterSignInUrl: window.location.origin + window.location.pathname,
                         afterSignUpUrl: window.location.origin + window.location.pathname,
@@ -130,7 +134,18 @@ export const AuthService = (function() {
                 }
                 onAuthRequired();
             } catch (err) {
-                console.error('Auth initialization failed:', err);
+                console.error('AuthService: Initialization failed:', err);
+                if (container) {
+                    container.innerHTML = `
+                        <div style="color: #ef4444; padding: 20px; text-align: center;">
+                            <i class="fas fa-wifi-slash" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+                            <h3>Connection Error</h3>
+                            <p>Failed to load authentication services. Please check your internet connection or try refreshing.</p>
+                            <p style="font-size: 0.7rem; margin-top: 10px; opacity: 0.7;">${err.message}</p>
+                            <button class="hero-btn hero-btn-primary" onclick="window.location.reload()" style="margin-top: 15px;">Retry</button>
+                        </div>
+                    `;
+                }
             }
         },
         logout: async () => {
