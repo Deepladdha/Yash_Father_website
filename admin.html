@@ -384,48 +384,79 @@
     </div>
 
     <!-- Services -->
-    <script type="module">
-        import { CMS } from './js/admin/cms.js';
-        import { AuthService } from './js/services/auth.js';
-        import { MonitoringService } from './js/services/monitoring.js';
-        import { BackupService } from './js/services/backup.js';
-        
-        // Error handling for authentication
-        function showAuthError(message) {
-            const container = document.getElementById('clerk-sign-in');
-            if (container) {
-                container.innerHTML = `
-                    <div style="color: #ef4444; padding: 20px; text-align: center;">
-                        <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
-                        <h3>Authentication Error</h3>
-                        <p>${message}</p>
-                        <button class="hero-btn hero-btn-secondary" onclick="window.location.reload()" style="margin-top: 20px; color: var(--blue);">
-                            <i class="fas fa-redo"></i> Retry
-                        </button>
-                    </div>
-                `;
+    <div id="debug-log" style="display: none; position: fixed; bottom: 10px; left: 10px; right: 10px; background: #000; color: #0f0; padding: 10px; font-family: monospace; font-size: 12px; z-index: 10002; border-radius: 5px; max-height: 200px; overflow-y: auto; opacity: 0.9; border: 1px solid #333;">
+        <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #333; margin-bottom: 5px; padding-bottom: 2px;">
+            <span>SYSTEM DEBUG LOG</span>
+            <button onclick="document.getElementById('debug-log').style.display='none'" style="background:none; border:none; color:#f00; cursor:pointer;">[CLOSE]</button>
+        </div>
+    </div>
+    
+    <script>
+        // Emergency Debugger
+        window.onerror = function(msg, url, line) {
+            const log = document.getElementById('debug-log');
+            if (log) {
+                log.style.display = 'block';
+                log.innerHTML += `<div style="color:#f77">[Error] ${msg} at ${line}</div>`;
             }
-        }
+            return false;
+        };
+        window.onunhandledrejection = function(event) {
+            const log = document.getElementById('debug-log');
+            if (log) {
+                log.style.display = 'block';
+                log.innerHTML += `<div style="color:#f77">[Promise Error] ${event.reason}</div>`;
+            }
+        };
+        const oldLog = console.log;
+        console.log = function() {
+            oldLog.apply(console, arguments);
+            const log = document.getElementById('debug-log');
+            if (log) {
+                log.style.display = 'block';
+                log.innerHTML += `<div>[Log] ${Array.from(arguments).join(' ')}</div>`;
+                log.scrollTop = log.scrollHeight;
+            }
+        };
+    </script>
 
-        // Orchestration with enhanced error handling
-         async function initializeAdmin() {
-             console.log('Admin: Initializing services...');
-             
-             try {
-                 // Initialize monitoring and backup independently
-                 try { MonitoringService.init(); } catch (e) { console.error('Monitoring failed:', e); }
-                 try { BackupService.init(); } catch (e) { console.error('Backup failed:', e); }
-                 
-                 AuthService.init(
-                    // Success
+    <script type="module">
+        console.log('Admin: Initialization starting...');
+        
+        let CMS, AuthService, MonitoringService, BackupService;
+
+        async function loadAndInit() {
+            try {
+                console.log('Admin: Loading core modules...');
+                
+                // Load modules using dynamic import
+                const [cmsMod, authMod, monitorMod, backupMod] = await Promise.all([
+                    import('./js/admin/cms.js'),
+                    import('./js/services/auth.js'),
+                    import('./js/services/monitoring.js'),
+                    import('./js/services/backup.js')
+                ]);
+                
+                CMS = cmsMod.CMS;
+                AuthService = authMod.AuthService;
+                MonitoringService = monitorMod.MonitoringService;
+                BackupService = backupMod.BackupService;
+                
+                console.log('Admin: All modules loaded');
+
+                // Initialize services
+                if (MonitoringService) MonitoringService.init();
+                if (BackupService) BackupService.init();
+                
+                if (!AuthService) throw new Error('AuthService failed to load');
+
+                AuthService.init(
+                    // Success callback
                     (user) => {
                         console.log('Admin: Auth success:', user.primaryEmailAddress?.emailAddress);
-                        const authScreen = document.getElementById('auth-screen');
-                        const adminLayout = document.getElementById('admin-layout');
-                        if (authScreen) authScreen.style.display = 'none';
-                        if (adminLayout) adminLayout.style.display = 'block';
+                        document.getElementById('auth-screen').style.display = 'none';
+                        document.getElementById('admin-layout').style.display = 'block';
                         
-                        // Profile
                         const profile = document.getElementById('user-profile');
                         if (profile) {
                             profile.innerHTML = `
@@ -434,324 +465,155 @@
                             `;
                         }
 
-                        // Initialize CMS
-                        CMS.init();
+                        if (CMS) {
+                            CMS.init();
+                            // Link backup management to CMS initialization
+                            const originalInit = CMS.init;
+                            CMS.init = function() {
+                                originalInit.call(this);
+                                setupBackupManagement();
+                            };
+                        }
                     },
-                    // Required
+                    // Required callback
                     () => {
-                        console.log('Admin: Login required');
-                        const authScreen = document.getElementById('auth-screen');
-                        if (authScreen) authScreen.style.display = 'flex';
+                        console.log('Admin: Login required - mounting Clerk');
+                        document.getElementById('auth-screen').style.display = 'flex';
                     }
                 );
-             } catch (error) {
-                 console.error('Admin: Critical init failure:', error);
-                 showAuthError(`System initialization failed: ${error.message}`);
-             }
-         }
+            } catch (err) {
+                console.error('Admin: Critical failure:', err);
+                const container = document.getElementById('clerk-sign-in');
+                if (container) {
+                    container.innerHTML = `
+                        <div style="color: #ef4444; padding: 20px; text-align: center;">
+                            <i class="fas fa-bug" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                            <h3>System Error</h3>
+                            <p>${err.message}</p>
+                            <button class="hero-btn hero-btn-primary" onclick="window.location.reload()" style="margin-top:15px">Retry System Load</button>
+                        </div>
+                    `;
+                }
+            }
+        }
+        
+        function setupBackupManagement() {
+            console.log('Admin: Setting up backup management...');
+            
+            // Create manual backup
+            document.getElementById('create-backup-btn')?.addEventListener('click', async () => {
+                const btn = document.getElementById('create-backup-btn');
+                const originalText = btn.innerHTML;
+                try {
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
+                    btn.disabled = true;
+                    const success = await BackupService.createBackup();
+                    if (success) {
+                        showNotification('Backup created successfully!', 'success');
+                        updateBackupStatus();
+                        updateBackupList();
+                    } else showNotification('Failed to create backup', 'error');
+                } catch (error) {
+                    showNotification('Error: ' + error.message, 'error');
+                } finally {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }
+            });
 
-        // Initialize when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeAdmin);
-        } else {
-            initializeAdmin();
+            // Export JSON
+            document.getElementById('export-data-btn')?.addEventListener('click', async () => {
+                try {
+                    const res = await BackupService.exportData();
+                    if (res) {
+                        const link = document.createElement('a');
+                        link.href = res.downloadUri;
+                        link.download = res.fileName;
+                        link.click();
+                        showNotification('Data exported!', 'success');
+                    }
+                } catch (e) { showNotification('Export failed', 'error'); }
+            });
+
+            // Check Health
+            document.getElementById('check-backup-health-btn')?.addEventListener('click', async () => {
+                const health = await BackupService.checkBackupHealth();
+                updateBackupStatus(health);
+                showNotification('Health check complete', 'info');
+            });
+
+            // Initial displays
+            updateBackupStatus();
+            updateBackupList();
         }
 
-        // Logout handler
-         document.getElementById('logout-btn')?.addEventListener('click', () => {
-             if (window.AuthService && typeof window.AuthService.logout === 'function') {
-                 AuthService.logout();
-             } else {
-                 window.location.reload();
-             }
-         });
-         
-         // Backup management functionality
-         function setupBackupManagement() {
-             // Create manual backup
-             document.getElementById('create-backup-btn')?.addEventListener('click', async () => {
-                 const btn = document.getElementById('create-backup-btn');
-                 const originalText = btn.innerHTML;
-                 
-                 try {
-                     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Backup...';
-                     btn.disabled = true;
-                     
-                     const success = await BackupService.createBackup();
-                     
-                     if (success) {
-                         showNotification('Backup created successfully!', 'success');
-                         updateBackupStatus();
-                         updateBackupList();
-                     } else {
-                         showNotification('Failed to create backup', 'error');
-                     }
-                 } catch (error) {
-                     console.error('Backup creation error:', error);
-                     showNotification('Backup creation failed: ' + error.message, 'error');
-                 } finally {
-                     btn.innerHTML = originalText;
-                     btn.disabled = false;
-                 }
-             });
-             
-             // Export data as JSON
-             document.getElementById('export-data-btn')?.addEventListener('click', async () => {
-                 const btn = document.getElementById('export-data-btn');
-                 const originalText = btn.innerHTML;
-                 
-                 try {
-                     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Exporting...';
-                     btn.disabled = true;
-                     
-                     const exportResult = await BackupService.exportData();
-                     
-                     if (exportResult) {
-                         // Create download link
-                         const link = document.createElement('a');
-                         link.href = exportResult.downloadUri;
-                         link.download = exportResult.fileName;
-                         document.body.appendChild(link);
-                         link.click();
-                         document.body.removeChild(link);
-                         
-                         showNotification('Data exported successfully!', 'success');
-                     } else {
-                         showNotification('Failed to export data', 'error');
-                     }
-                 } catch (error) {
-                     console.error('Export error:', error);
-                     showNotification('Export failed: ' + error.message, 'error');
-                 } finally {
-                     btn.innerHTML = originalText;
-                     btn.disabled = false;
-                 }
-             });
-             
-             // Check backup health
-             document.getElementById('check-backup-health-btn')?.addEventListener('click', async () => {
-                 const btn = document.getElementById('check-backup-health-btn');
-                 const originalText = btn.innerHTML;
-                 
-                 try {
-                     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
-                     btn.disabled = true;
-                     
-                     const health = await BackupService.checkBackupHealth();
-                     updateBackupStatus(health);
-                     
-                     showNotification('Backup health check completed', 'info');
-                 } catch (error) {
-                     console.error('Health check error:', error);
-                     showNotification('Health check failed: ' + error.message, 'error');
-                 } finally {
-                     btn.innerHTML = originalText;
-                     btn.disabled = false;
-                 }
-             });
-             
-             // Initial status update
-             setTimeout(() => {
-                 updateBackupStatus();
-                 updateBackupList();
-             }, 3000);
-         }
-         
-         // Update backup status display
-         async function updateBackupStatus(healthData = null) {
-             const statusEl = document.getElementById('backup-status');
-             if (!statusEl) return;
-             
-             try {
-                 const health = healthData || await BackupService.checkBackupHealth();
-                 
-                 let statusHtml = '';
-                 if (health.healthy) {
-                     statusHtml = `
-                         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                             <i class="fas fa-check-circle" style="color: #10b981; font-size: 1.5rem;"></i>
-                             <div>
-                                 <h4 style="margin: 0; color: var(--admin-accent);">Backup System Healthy</h4>
-                                 <p style="margin: 0; color: var(--text-mid); font-size: 0.9rem;">${health.message}</p>
-                             </div>
-                         </div>
-                         <p style="color: var(--text-light); font-size: 0.85rem; margin: 0;">
-                             Latest backup: ${health.latestBackup || 'N/A'}
-                         </p>
-                     `;
-                 } else {
-                     statusHtml = `
-                         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                             <i class="fas fa-exclamation-triangle" style="color: #ef4444; font-size: 1.5rem;"></i>
-                             <div>
-                                 <h4 style="margin: 0; color: var(--admin-accent);">Backup System Issue</h4>
-                                 <p style="margin: 0; color: var(--text-mid); font-size: 0.9rem;">${health.message}</p>
-                             </div>
-                         </div>
-                         <p style="color: var(--text-light); font-size: 0.85rem; margin: 0;">
-                             Recommendation: ${health.recommendation || 'Check system configuration'}
-                         </p>
-                     `;
-                 }
-                 
-                 statusEl.innerHTML = statusHtml;
-                 
-             } catch (error) {
-                 statusEl.innerHTML = `
-                     <div style="color: #ef4444;">
-                         <i class="fas fa-exclamation-circle"></i> Failed to load backup status: ${error.message}
-                     </div>
-                 `;
-             }
-         }
-         
-         // Update backup list display
-         async function updateBackupList() {
-             const backupsEl = document.getElementById('available-backups');
-             if (!backupsEl) return;
-             
-             try {
-                 const backups = await BackupService.getBackups();
-                 
-                 if (!backups || backups.length === 0) {
-                     backupsEl.querySelector('div').innerHTML = `
-                         <p style="color: var(--text-mid); margin: 0; text-align: center; padding: 30px;">
-                             No backups available yet. Create your first backup.
-                         </p>
-                     `;
-                     return;
-                 }
-                 
-                 let backupsHtml = '<div style="display: flex; flex-direction: column; gap: 12px;">';
-                 
-                 backups.forEach(backup => {
-                     const date = new Date(backup.timestamp);
-                     const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
-                     const sizeMB = (backup.size / 1024 / 1024).toFixed(2);
-                     
-                     backupsHtml += `
-                         <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
-                             <div style="display: flex; justify-content: space-between; align-items: center;">
-                                 <div>
-                                     <strong style="color: var(--admin-accent);">${backup.id}</strong>
-                                     <div style="font-size: 0.85rem; color: var(--text-light); margin-top: 4px;">
-                                         ${formattedDate} • ${sizeMB} MB
-                                     </div>
-                                 </div>
-                                 <button class="hero-btn hero-btn-secondary btn-small restore-backup-btn" data-backup-id="${backup.id}" style="color: var(--blue);">
-                                     <i class="fas fa-undo"></i> Restore
-                                 </button>
-                             </div>
-                         </div>
-                     `;
-                 });
-                 
-                 backupsHtml += '</div>';
-                 backupsEl.querySelector('div').innerHTML = backupsHtml;
-                 
-                 // Add restore event listeners
-                 document.querySelectorAll('.restore-backup-btn').forEach(btn => {
-                     btn.addEventListener('click', async (e) => {
-                         const backupId = e.target.closest('button').dataset.backupId;
-                         
-                         if (confirm(`Are you sure you want to restore from backup "${backupId}"? This will overwrite current data.`)) {
-                             try {
-                                 const success = await BackupService.restoreBackup(backupId);
-                                 
-                                 if (success) {
-                                     showNotification('Restore completed successfully!', 'success');
-                                     updateBackupList();
-                                 } else {
-                                     showNotification('Restore failed', 'error');
-                                 }
-                             } catch (error) {
-                                 console.error('Restore error:', error);
-                                 showNotification('Restore failed: ' + error.message, 'error');
-                             }
-                         }
-                     });
-                 });
-                 
-             } catch (error) {
-                 backupsEl.querySelector('div').innerHTML = `
-                     <div style="color: #ef4444; text-align: center; padding: 30px;">
-                         <i class="fas fa-exclamation-circle"></i> Failed to load backup list: ${error.message}
-                     </div>
-                 `;
-             }
-         }
-         
-         // Notification helper
-         function showNotification(message, type = 'info') {
-             // Remove existing notifications
-             const existing = document.querySelector('.admin-notification');
-             if (existing) existing.remove();
-             
-             const colors = {
-                 success: '#10b981',
-                 error: '#ef4444',
-                 info: '#3b82f6',
-                 warning: '#f59e0b'
-             };
-             
-             const notification = document.createElement('div');
-             notification.className = 'admin-notification';
-             notification.style.cssText = `
-                 position: fixed;
-                 top: 20px;
-                 right: 20px;
-                 background: white;
-                 padding: 15px 20px;
-                 border-radius: 8px;
-                 box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                 border-left: 4px solid ${colors[type] || colors.info};
-                 z-index: 10001;
-                 max-width: 400px;
-                 animation: slideIn 0.3s ease;
-             `;
-             
-             notification.innerHTML = `
-                 <div style="display: flex; align-items: center; gap: 10px;">
-                     <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}" 
-                        style="color: ${colors[type] || colors.info};"></i>
-                     <span style="color: var(--text-dark);">${message}</span>
-                 </div>
-             `;
-             
-             document.body.appendChild(notification);
-             
-             // Auto-remove after 5 seconds
-             setTimeout(() => {
-                 if (notification.parentNode) {
-                     notification.style.animation = 'slideOut 0.3s ease';
-                     setTimeout(() => {
-                         if (notification.parentNode) notification.remove();
-                     }, 300);
-                 }
-             }, 5000);
-         }
-         
-         // Add CSS animations
-         const style = document.createElement('style');
-         style.textContent = `
-             @keyframes slideIn {
-                 from { transform: translateX(100%); opacity: 0; }
-                 to { transform: translateX(0); opacity: 1; }
-             }
-             @keyframes slideOut {
-                 from { transform: translateX(0); opacity: 1; }
-                 to { transform: translateX(100%); opacity: 0; }
-             }
-         `;
-         document.head.appendChild(style);
-         
-         // Initialize backup management after CMS
-         CMS.init = (function(originalInit) {
-             return function() {
-                 originalInit.call(this);
-                 setTimeout(setupBackupManagement, 1000);
-             };
-         })(CMS.init);
-     </script>
+        async function updateBackupStatus(healthData = null) {
+            const el = document.getElementById('backup-status');
+            if (!el) return;
+            try {
+                const h = healthData || await BackupService.checkBackupHealth();
+                el.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-${h.healthy ? 'check-circle' : 'exclamation-triangle'}" style="color: ${h.healthy ? '#10b981' : '#ef4444'}; font-size: 1.5rem;"></i>
+                        <div>
+                            <h4 style="margin: 0;">${h.healthy ? 'System Healthy' : 'System Issue'}</h4>
+                            <p style="margin: 0; font-size: 0.85rem;">${h.message}</p>
+                        </div>
+                    </div>
+                `;
+            } catch (e) { el.innerHTML = 'Status unavailable'; }
+        }
+
+        async function updateBackupList() {
+            const el = document.getElementById('available-backups');
+            if (!el) return;
+            try {
+                const backups = await BackupService.getBackups();
+                const listDiv = el.querySelector('div');
+                if (!backups || backups.length === 0) {
+                    listDiv.innerHTML = '<p style="text-align:center; padding:20px">No backups found</p>';
+                    return;
+                }
+                listDiv.innerHTML = backups.map(b => `
+                    <div style="background:white; padding:12px; border-radius:8px; margin-bottom:8px; border:1px solid var(--border); display:flex; justify-content:space-between; align-items:center">
+                        <div>
+                            <strong>${b.id}</strong>
+                            <div style="font-size:0.75rem; color:var(--text-light)">${new Date(b.timestamp).toLocaleString()}</div>
+                        </div>
+                        <button class="hero-btn hero-btn-secondary btn-small restore-btn" data-id="${b.id}">Restore</button>
+                    </div>
+                `).join('');
+                
+                el.querySelectorAll('.restore-btn').forEach(btn => {
+                    btn.addEventListener('click', async () => {
+                        const id = btn.dataset.id;
+                        if (confirm(`Restore ${id}? Current data will be overwritten.`)) {
+                            const ok = await BackupService.restoreBackup(id);
+                            if (ok) showNotification('Restore complete!', 'success');
+                            else showNotification('Restore failed', 'error');
+                        }
+                    });
+                });
+            } catch (e) { console.error('List load failed', e); }
+        }
+
+        function showNotification(msg, type = 'info') {
+            const colors = { success: '#10b981', error: '#ef4444', info: '#3b82f6' };
+            const div = document.createElement('div');
+            div.style.cssText = `position:fixed; top:20px; right:20px; background:white; padding:12px 20px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.15); border-left:4px solid ${colors[type]}; z-index:10005;`;
+            div.innerHTML = msg;
+            document.body.appendChild(div);
+            setTimeout(() => div.remove(), 4000);
+        }
+
+        // Start modules
+        loadAndInit();
+
+        // Logout
+        document.getElementById('logout-btn')?.addEventListener('click', () => {
+            if (AuthService) AuthService.logout();
+            else window.location.reload();
+        });
+    </script>
 </body>
 </html>
