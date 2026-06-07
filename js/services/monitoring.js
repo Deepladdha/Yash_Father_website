@@ -305,10 +305,3 @@ export const MonitoringService = (function() {
         flushErrorBuffer
     };
 })();
-
-// Auto-initialize if imported
-if (typeof window !== 'undefined') {
-    window.addEventListener('load', () => {
-        setTimeout(() => MonitoringService.init(), 1000);
-    });
-}

@@ -6,6 +6,8 @@
 import { CONFIG } from '../config.js';
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
+console.log('BackupService: CONFIG loaded:', !!CONFIG);
+
 export const BackupService = (function() {
     let supabaseClient = null;
     const BACKUP_INTERVAL = 3600000; // 1 hour
@@ -342,10 +344,3 @@ export const BackupService = (function() {
         cleanupOldBackups
     };
 })();
-
-// Auto-initialize if imported
-if (typeof window !== 'undefined') {
-    window.addEventListener('load', () => {
-        setTimeout(() => BackupService.init(), 2000);
-    });
-}

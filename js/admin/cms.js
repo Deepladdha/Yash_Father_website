@@ -1,5 +1,8 @@
 import { SupabaseService } from '../services/supabase.js';
 import { AuthService } from '../services/auth.js';
+import { CONFIG } from '../config.js';
+
+console.log('CMS: CONFIG loaded:', !!CONFIG);
 
 /**
  * CMS Logic

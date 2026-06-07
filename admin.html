@@ -461,12 +461,7 @@
 
                         if (CMS) {
                             CMS.init();
-                            // Link backup management to CMS initialization
-                            const originalInit = CMS.init;
-                            CMS.init = function() {
-                                originalInit.call(this);
-                                setupBackupManagement();
-                            };
+                            setupBackupManagement();
                         }
                     },
                     // Required callback
