@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+    <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail | IKON Business Products & Solutions</title>
+    <link rel="icon" href="img/IKON-Logo-2.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- SDKs -->
+    <script type="module" src="js/components.js"></script>
+    <script type="module" src="js/product-loader.js"></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <div class="breadcrumb" id="breadcrumb">
+                <a href="index.html">Home</a> / <a href="product-center.html">Products</a> / <span id="productNameBreadcrumb">Loading...</span>
+            </div>
+            <h1 id="productTitle">Loading Product...</h1>
+            <p id="productSubtitle"></p>
+        </div>
+    </div>
+
+    <section class="section product-detail-section">
+        <div class="section-inner">
+            <div class="product-detail-grid">
+                <div class="product-main-info">
+                    <div class="product-image-large">
+                        <img id="productImage" src="" alt="">
+                    </div>
+                    <div class="product-description card">
+                        <h3>Overview</h3>
+                        <p id="productDescription"></p>
+                    </div>
+                </div>
+
+                <div class="product-specs-sidebar">
+                    <div class="detail-card card">
+                        <h3>Key Features</h3>
+                        <ul id="productFeatures"></ul>
+                    </div>
+                    <div class="cta-box card">
+                        <h3>Interested?</h3>
+                        <p>Get a customized quote for this machine.</p>
+                        <a href="contact-form.html" class="btn btn-primary w-100">Request Quote</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="specs-section mt-32">
+                <h2 class="section-title">Technical <span>Specifications</span></h2>
+                <div class="divider"></div>
+                <div class="spec-table-wrap">
+                    <table class="spec-table" id="specTable">
+                        <thead>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer-placeholder"></footer>
+</body>
+</html>

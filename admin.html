@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IKON Admin Portal | Content Studio</title>
+    <link rel="icon" href="img/IKON-Logo-2.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* ADMIN PORTAL EXCLUSIVE STYLES */
+        :root {
+            --sidebar-w: 260px;
+            --admin-bg: #f8fafc;
+            --admin-accent: #064d81;
+            --admin-green: #a6ce39;
+        }
+
+        body.admin-body {
+            background: var(--admin-bg);
+            min-height: 100vh;
+            display: block;
+            overflow: auto;
+        }
+
+        /* Login Screen Refined */
+        #auth-screen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(rgba(6, 77, 129, 0.8), rgba(6, 77, 129, 0.9)), url('img/subtle-background.png');
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .login-card {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 440px;
+            text-align: center;
+        }
+
+        .login-card img { height: 70px; margin-bottom: 30px; }
+        .login-card h1 { font-family: var(--font-head); font-size: 2.2rem; color: var(--admin-accent); margin-bottom: 10px; }
+        .login-card p { color: var(--text-light); margin-bottom: 30px; }
+
+        /* Dashboard Layout */
+        .admin-layout { display: none; padding-left: var(--sidebar-w); }
+        
+        .sidebar {
+            width: var(--sidebar-w);
+            background: var(--admin-accent);
+            color: white;
+            position: fixed;
+            left: 0; top: 0; bottom: 0;
+            padding: 30px 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-brand { padding: 0 30px 40px; display: flex; align-items: center; gap: 15px; }
+        .sidebar-brand img { height: 45px; }
+        .sidebar-brand div { line-height: 1.1; }
+        .sidebar-brand span { font-size: 0.7rem; color: var(--admin-green); font-weight: 400; text-transform: uppercase; letter-spacing: 2px; }
+
+        .sidebar-nav { flex: 1; }
+        .nav-item {
+            padding: 16px 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: rgba(255,255,255,0.7);
+            transition: all 0.3s;
+            cursor: pointer;
+            border-left: 4px solid transparent;
+        }
+        .nav-item:hover, .nav-item.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-left-color: var(--admin-green);
+        }
+
+        .main-content { padding: 40px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        .header h2 { font-family: var(--font-head); font-size: 2.5rem; color: var(--admin-accent); }
+
+        .profile { display: flex; align-items: center; gap: 15px; background: white; padding: 10px 20px; border-radius: 50px; box-shadow: var(--shadow); }
+        .profile img { width: 35px; height: 35px; border-radius: 50%; }
+
+        /* Grid & Cards */
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; }
+        .stat-card { background: white; padding: 30px; border-radius: 16px; box-shadow: var(--shadow); }
+        .stat-card h3 { font-size: 0.9rem; color: var(--text-light); text-transform: uppercase; margin-bottom: 10px; }
+        .stat-card .val { font-size: 3rem; font-weight: 800; color: var(--admin-accent); line-height: 1; }
+
+        .admin-card { background: white; border-radius: 16px; padding: 30px; box-shadow: var(--shadow); margin-top: 30px; }
+
+        /* Tabs */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* Tables & Lists */
+        .admin-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .admin-table th { text-align: left; padding: 15px; background: #f1f5f9; color: var(--admin-accent); font-weight: 700; }
+        .admin-table td { padding: 15px; border-bottom: 1px solid #e2e8f0; }
+
+        .product-item { display: flex; align-items: center; gap: 20px; padding: 15px; border-bottom: 1px solid #e2e8f0; }
+        .product-item img { width: 50px; height: 50px; object-fit: contain; background: #f8fafc; border-radius: 8px; }
+        .product-info { flex: 1; }
+        .product-info h4 { margin: 0; color: var(--admin-accent); }
+        .product-info p { margin: 0; font-size: 0.85rem; color: var(--text-light); }
+
+        .btn-icon { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1.1rem; }
+        
+        /* Modal Refined */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 10000; align-items: center; justify-content: center; }
+        .modal-content { background: white; padding: 40px; border-radius: 20px; width: 90%; max-width: 550px; position: relative; }
+        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 1.5rem; cursor: pointer; opacity: 0.5; }
+
+        .loader { text-align: center; padding: 40px; color: var(--text-light); }
+        .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+        .badge.new { background: #dcfce7; color: #166534; }
+    </style>
+</head>
+<body class="admin-body">
+
+    <!-- LOGIN SCREEN -->
+    <div id="auth-screen">
+        <div class="login-card">
+            <img src="img/IKON-Logo-2.png" alt="IKON">
+            <h1>Admin Portal</h1>
+            <p>Welcome back! Please sign in to manage your content.</p>
+            <div id="clerk-sign-in">
+                <!-- Clerk will mount here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD -->
+    <div class="admin-layout" id="admin-layout">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <img src="img/IKON-Logo-2.png" alt="IKON">
+                <div>
+                    <h3 style="margin:0; font-family: var(--font-head);">IKON</h3>
+                    <span>Content Studio</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-item active" data-tab="dashboard">
+                    <i class="fas fa-chart-pie"></i> Dashboard
+                </div>
+                <div class="nav-item" data-tab="products">
+                    <i class="fas fa-boxes"></i> Products
+                </div>
+                <div class="nav-item" data-tab="leads">
+                    <i class="fas fa-headset"></i> Leads
+                </div>
+                <div class="nav-item" data-tab="analytics">
+                    <i class="fas fa-chart-line"></i> Analytics
+                </div>
+                <div class="nav-item" data-tab="settings">
+                    <i class="fas fa-sliders-h"></i> Settings
+                </div>
+            </nav>
+            <div style="padding: 30px;">
+                <button class="hero-btn hero-btn-secondary" id="logout-btn" style="width: 100%; border-color: rgba(255,255,255,0.2);">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <h2 id="tab-title">Dashboard Overview</h2>
+                <div class="profile" id="user-profile">
+                    <!-- User info -->
+                </div>
+            </header>
+
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <h3>Total Products</h3>
+                        <div class="val" id="count-products">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Industries</h3>
+                        <div class="val" id="count-industries">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>New Leads</h3>
+                        <div class="val" id="count-leads">0</div>
+                    </div>
+                </div>
+
+                <div class="admin-card">
+                    <h3 style="margin-bottom: 20px;">Quick Actions</h3>
+                    <div style="display: flex; gap: 15px;">
+                        <button class="hero-btn hero-btn-primary open-product-modal"><i class="fas fa-plus"></i> Add New Machine</button>
+                        <button class="hero-btn hero-btn-secondary" style="color: var(--admin-accent);"><i class="fas fa-cog"></i> Update Config</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Tab -->
+            <div id="products" class="tab-content">
+                <div class="admin-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3>Machine Inventory</h3>
+                        <button class="hero-btn hero-btn-primary btn-small open-product-modal">Add Product</button>
+                    </div>
+                    <div id="product-list-container">
+                        <!-- Loaded via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leads Tab -->
+            <div id="leads" class="tab-content">
+                <div class="admin-card">
+                    <h3>Recent Inquiries</h3>
+                    <div id="leads-list-container">
+                        <!-- Loaded via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div id="analytics" class="tab-content">
+                <div class="admin-card" style="padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3 style="margin: 0;">GA4 Performance Dashboard</h3>
+                        <a href="https://analytics.google.com/" target="_blank" class="hero-btn hero-btn-secondary" style="color: var(--blue);">
+                            <i class="fas fa-external-link-alt"></i> Open GA4 Full Report
+                        </a>
+                    </div>
+                    <div style="width: 100%; height: 800px; border-radius: 12px; overflow: hidden; background: #fff; border: 1px solid var(--border);">
+                        <iframe 
+                            id="analytics-iframe"
+                            width="100%" 
+                            height="100%" 
+                            frameborder="0" 
+                            style="border:0" 
+                            allowfullscreen 
+                            sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div id="settings" class="tab-content">
+                <div class="admin-card">
+                    <h3>Global Site Settings</h3>
+                    <p style="color: var(--text-light); margin-bottom: 30px;">Manage information that appears across the entire IKON website.</p>
+                    
+                    <form id="settings-form">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                            <div class="form-section">
+                                <h4 style="margin-bottom: 15px; color: var(--blue);">Contact Information</h4>
+                                <div class="form-group">
+                                    <label>Company Phone</label>
+                                    <input type="text" id="set-phone" placeholder="+91 12345 67890">
+                                </div>
+                                <div class="form-group">
+                                    <label>Public Email</label>
+                                    <input type="email" id="set-email" placeholder="info@ikkon.com">
+                                </div>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h4 style="margin-bottom: 15px; color: var(--blue);">Social Links</h4>
+                                <div class="form-group">
+                                    <label>WhatsApp Link</label>
+                                    <input type="text" id="set-whatsapp" placeholder="https://wa.me/...">
+                                </div>
+                                <div class="form-group">
+                                    <label>LinkedIn Profile</label>
+                                    <input type="text" id="set-linkedin" placeholder="https://linkedin.com/company/...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" id="set-maintenance" style="width: auto;">
+                                <span>Enable Maintenance Mode (Hides website from public)</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="hero-btn hero-btn-primary" style="margin-top: 20px;">
+                            <i class="fas fa-save"></i> Save Global Settings
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- PRODUCT MODAL -->
+    <div class="modal" id="product-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 style="margin-bottom: 25px; font-family: var(--font-head); color: var(--admin-accent);">Add New Product</h2>
+            <form id="product-form">
+                <div class="form-group">
+                    <label>Machine Name</label>
+                    <input type="text" id="prod-name" required placeholder="e.g., IOCM Multi-Layer">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="prod-category">
+                            <option value="Cutting">Cutting</option>
+                            <option value="Laser">Laser</option>
+                            <option value="Router">Router</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Image Path</label>
+                        <input type="text" id="prod-image" placeholder="img/products/file.png">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="prod-desc" rows="4"></textarea>
+                </div>
+                <button type="submit" class="hero-btn hero-btn-primary" style="width: 100%; margin-top: 10px;">
+                    Save to Database
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Services -->
+    <script type="module">
+        import { CMS } from './js/admin/cms.js';
+        import { AuthService } from './js/services/auth.js';
+        
+        // Orchestration
+        AuthService.init(
+            // Success
+            (user) => {
+                const authScreen = document.getElementById('auth-screen');
+                const adminLayout = document.getElementById('admin-layout');
+                if (authScreen) authScreen.style.display = 'none';
+                if (adminLayout) adminLayout.style.display = 'block';
+                
+                // Profile
+                const profile = document.getElementById('user-profile');
+                if (profile) {
+                    profile.innerHTML = `
+                        <span style="font-weight:600;">${user.fullName || user.primaryEmailAddress.emailAddress}</span>
+                        <img src="${user.imageUrl}">
+                    `;
+                }
+
+                CMS.init();
+            },
+            // Required
+            () => {
+                console.log('Login required or access denied');
+            }
+        );
+
+        document.getElementById('logout-btn')?.addEventListener('click', () => AuthService.logout());
+    </script>
+</body>
+</html>

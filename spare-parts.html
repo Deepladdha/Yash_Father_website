@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spare Parts | IKON Business Products & Solutions</title>
+    <meta name="description" content="Genuine replacement parts and consumables for all IKON machines. Ensure peak performance with high-quality spares.">
+    <link rel="icon" href="img/IKON-Logo-2.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1TBGXB2829"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-1TBGXB2829', { 'debug_mode': true });
+        
+        // Track page views with additional parameters
+        gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: window.location.href,
+            page_path: window.location.pathname
+        });
+    </script>
+    <!-- Configuration -->
+    <script src="js/config.js"></script>
+    <!-- User Tracking -->
+    <script src="js/user-tracking.js"></script>
+    <!-- Performance Monitoring -->
+    <script src="js/performance-monitor.js"></script>
+    <!-- Privacy Controls -->
+    <script src="js/privacy-controls.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Sidebar and product-specific styles remain inline as they are page-unique */
+        .sidebar-links li a { 
+            display: block; 
+            padding: 14px 20px; 
+            font-size: 0.95rem; 
+            border-bottom: 1px solid var(--border); 
+            color: var(--text-mid); 
+            font-weight: 500; 
+            text-decoration: none !important;
+            transition: all var(--transition);
+        }
+        .sidebar-links li a:hover { 
+            background: var(--off-white); 
+            color: var(--blue); 
+            padding-left: 26px; 
+            border-left: 4px solid var(--blue-light); 
+        }
+        .sidebar-links li a.active { 
+            background: var(--off-white); 
+            border-left: 4px solid var(--green); 
+            color: var(--blue); 
+            font-weight: 700; 
+        }
+        .parts-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        @media (max-width: 1100px) { .parts-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .parts-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <!-- PRE-HEADER BAR -->
+    <div class="pre-header">
+        <div class="pre-header-inner">
+            <span class="pre-header-text">Welcome to IKON Business Products & Solutions</span>
+            <div class="pre-header-socials">
+                <a href="https://www.facebook.com/ikonbps" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/ikon_bps/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/ikon-business-products-and-solutions/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.youtube.com/@IKON_BPS" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="navbar">
+            <div class="nav-brand">
+                <img src="img/IKON-Logo-2.png" alt="IKON Logo">
+                <div class="nav-brand-text">IKON Business Products <span>& Solutions</span></div>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <div class="dropdown">
+                    <a href="product-center.html" class="active">Product Center <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="cnc-oscillating-knife.html">CNC Oscillating Knife</a>
+                        <a href="cnc-router.html">CNC Router</a>
+                        <a href="cnc-multi-layer.html">CNC Multi-Layer</a>
+                        <a href="co2-laser.html">CO2 Laser</a>
+                        <a href="fiber-laser.html">Fiber Laser</a>
+                        <a href="spare-parts.html">Spare Parts</a>
+                    </div>
+                </div>
+                <a href="applications.html">Applications</a>
+                <a href="about-us.html">About Us</a>
+                <a href="contact-form.html" class="nav-cta">Contact Us</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / <a href="product-center.html">Product Center</a> / Spare Parts
+            </div>
+            <h1>Spare Parts</h1>
+            <p>Genuine replacement parts for all IKON machines to ensure peak performance and uptime.</p>
+        </div>
+    </div>
+
+    <!-- PARTS CONTENT -->
+    <section class="section parts-section">
+        <div class="section-inner">
+            <div class="section-label">GENUINE SPARES</div>
+            <h2 class="section-title">Choose Your <span>Spare Parts</span></h2>
+            <div class="divider"></div>
+
+            <div class="parts-grid">
+                <a href="detail-spare-parts.html?app=co2-laser-tube-yongali-i-series-efr-reci" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CO2 Laser Cutting Machine..png" alt="Co2 Laser Tube"></div>
+                    <div class="product-card-body">
+                        <h3>Co2 Laser Tube - Yongali / I Series / EFR /RECI</h3>
+                        <p>Power: 80w/100w/130w | Material: Glass | Diameter: 80mm/60mm</p>
+                        <span class="product-card-explore">View Technical Details →</span>
+                    </div>
+                </a>
+                <a href="detail-spare-parts.html?app=co2-laser-tube" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CO2 Laser Cutting Machine..png" alt="Co2 Laser Tube"></div>
+                    <div class="product-card-body">
+                        <h3>Co2 Laser Tube</h3>
+                        <p>Power: 80w, 100w And 120w | Material: Glass | Rated power: 80 W</p>
+                        <span class="product-card-explore">View Technical Details →</span>
+                    </div>
+                </a>
+                <a href="detail-spare-parts.html?app=co2-laser-machine-linear-block" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CO2 Laser Cutting Machine..png" alt="Co2 Laser Machine Linear Block"></div>
+                    <div class="product-card-body">
+                        <h3>Co2 Laser Machine Linear Block</h3>
+                        <p>Bearing Type: Ball Bearing | Size: Medium | Material: Stainless Steel</p>
+                        <span class="product-card-explore">View Technical Details →</span>
+                    </div>
+                </a>
+                <a href="detail-spare-parts.html?app=co2-water-chiller-pump" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CO2 Laser Cutting Machine..png" alt="Co2 Water Chiller Pump"></div>
+                    <div class="product-card-body">
+                        <h3>Co2 Water Chiller Pump</h3>
+                        <p>Power: 1 HP | Model: CW Series Chiller Pump | Motor Phase: Single Phase</p>
+                        <span class="product-card-explore">View Technical Details →</span>
+                    </div>
+                </a>
+                <a href="detail-spare-parts.html?app=air-compressor-for-co2-laser-cutting-machine" class="product-card">
+                    <div class="product-card-img"><img src="img/products/CO2 Laser Cutting Machine..png" alt="Air Compressor"></div>
+                    <div class="product-card-body">
+                        <h3>Air Compressor- For Co2 Laser Cutting Machine</h3>
+                        <p>Horse Power: 0.5 HP | Model: ACO-012 / ACO-009 | Brand: Ikon</p>
+                        <span class="product-card-explore">View Technical Details →</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <!-- Brand -->
+            <div>
+                <img src="img/IKON-Logo-2.png" alt="IKON Logo" class="footer-brand-logo">
+                <p class="footer-brand-desc">IKON Business Products & Solutions is dedicated to providing cutting-edge solutions for various industries, ensuring efficiency and excellence in every product. Our team of passionate experts is committed to pushing the boundaries of technology.</p>
+                <div class="footer-socials">
+                    <a href="https://www.facebook.com/ikonbps" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/ikon_bps/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/ikon-business-products-and-solutions/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.youtube.com/@IKON_BPS" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <!-- Quick Links -->
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="product-center.html">Product Center</a></li>
+                    <li><a href="applications.html">Applications</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="blog-index.html">Blog</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="contact-form.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <!-- Contact -->
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <div class="footer-contact-row">
+                    <i class="fas fa-map-marker-alt footer-contact-icon"></i>
+                    <span class="footer-contact-text">B-141, B-Wing, 1st Floor, Kiran Industrial Estate, MG Road, Goregaon West, Mumbai – 400104</span>
+                </div>
+                <div class="footer-contact-row">
+                    <i class="fas fa-phone-alt footer-contact-icon"></i>
+                    <span class="footer-contact-text"><a href="tel:+917506998077" style="color:inherit;">+91 7506998077</a></span>
+                </div>
+                <div class="footer-contact-row">
+                    <i class="fas fa-envelope footer-contact-icon"></i>
+                    <span class="footer-contact-text">
+                        <a href="mailto:shobha@ikonbps.in" style="color:inherit;">shobha@ikonbps.in</a><br>
+                        <a href="mailto:muralidharan@ikonbps.in" style="color:inherit;">muralidharan@ikonbps.in</a>
+                    </span>
+                </div>
+                <div class="footer-contact-row">
+                    <i class="fab fa-whatsapp footer-contact-icon"></i>
+                    <span class="footer-contact-text"><a href="https://api.whatsapp.com/send/?phone=917506998077&text&type=phone_number&app_absent=0" target="_blank" style="color:inherit;">Chat on WhatsApp</a></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Popular Searches -->
+        <div class="popular-searches">
+            <h5>Popular Searches</h5>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">CNC Oscillating Knife Cutting Machine</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied high-precision CNC Oscillating Knife Cutting Machines to manufacturers in Mumbai, Pune, Delhi, Bangalore, Chennai, Hyderabad, Ahmedabad, Kolkata, Surat, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad, Nagpur, Kanpur, Lucknow, Visakhapatnam, Patna, Ghaziabad, Agra, Faridabad, Meerut, Varanasi, Gurgaon, Noida and many more cities across India.</p>
+                </div>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">CNC Router Machine</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied robust CNC Router Machines for wood carving and fabrication to clients in Mumbai, Delhi, Bangalore, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune, Jaipur, Surat, Lucknow, Kanpur, Nagpur, Visakhapatnam, Indore, Bhopal, Vadodara, Ghaziabad, Ludhiana, Agra, Nashik, Faridabad, Meerut, Rajkot and across the country.</p>
+                </div>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">Digital Flatbed Cutter (Packaging & Gaskets)</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied advanced Digital Flatbed Cutters for corrugated boxes and gasket manufacturing to businesses in Mumbai, Pune, Delhi, Bangalore, Chennai, Hyderabad, Ahmedabad, Kolkata, Surat, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad, Nagpur and more.</p>
+                </div>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">Textile & Garment Cutting Machine</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied state-of-the-art Automatic Fabric Cutters and Digital Fabric Cutting Plotters to textile hubs in Mumbai, Delhi, Bangalore, Surat, Pune, Jaipur, Ludhiana, Tirupur, Coimbatore, Erode, Salem, Bhilwara, Panipat, Varanasi, Kanpur, Agra, Ambur, Ranipet and Jalandhar.</p>
+                </div>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">Laser Cutting Solutions</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied versatile CO2 and Fiber Laser Metal Cutting Machines for precision engineering to industries in Mumbai, Delhi, Bangalore, Hyderabad, Ahmedabad, Chennai, Kolkata, Pune, Vadodara, Rajkot, Ludhiana, Jaipur, Indore, Chandigarh, Coimbatore, Nashik, Aurangabad and Nagpur.</p>
+                </div>
+            </div>
+            <div class="ps-accordion-item">
+                <button class="ps-accordion-btn">Specialized Applications</button>
+                <div class="ps-accordion-content">
+                    <p>IKON BPS has supplied specialized cutting solutions for Sound Insulation, Automotive Interiors, Carpets, and Composite Materials to key markets in Mumbai, Pune, Delhi, Chennai, Manesar, Sanand, Bhadohi, Mirzapur, Jaipur, Panipat, Srinagar, Bangalore and Hyderabad.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>&copy; 2025 IKON Business Products & Solutions. All Rights Reserved.</span>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Use</a>
+        </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+    <script>
+        // Popular Searches accordion
+        document.querySelectorAll('.ps-accordion-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const isOpen = content.classList.contains('open');
+                document.querySelectorAll('.ps-accordion-content').forEach(c => c.classList.remove('open'));
+                if (!isOpen) content.classList.add('open');
+            });
+        });
+
+        // Mobile menu
+        document.querySelector('.menu-toggle')?.addEventListener('click', () => {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
