@@ -1,3 +1,5 @@
+import { INDUSTRIES_DATA } from '../industries-data.js';
+
 // Mobile menu
 const menuToggle = document.querySelector('.menu-toggle');
 if (menuToggle) {
